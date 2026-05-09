@@ -8,24 +8,15 @@
         :root {
             --primary: #4f46e5;
             --primary-dark: #3730a3;
-            --english: #8b5cf6;
-            --math: #3b82f6;
-            --reasoning: #f59e0b;
-            --gk: #10b981;
-            --computer: #ef4444;
-            --result: #0891b2;
-            --login-accent: #6366f1;
             --bg: #f1f5f9;
             --card-bg: #ffffff;
             --text: #1e293b;
             --text-light: #64748b;
             --border: #e2e8f0;
-            --shadow: 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.03);
-            --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.06), 0 2px 6px rgba(0, 0, 0, 0.04);
-            --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.08), 0 3px 12px rgba(0, 0, 0, 0.05);
+            --shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
             --radius: 18px;
             --radius-sm: 12px;
-            --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition: 0.2s;
         }
 
         * {
@@ -33,54 +24,42 @@
             padding: 0;
             box-sizing: border-box;
         }
-
         html {
             height: 100%;
             -webkit-tap-highlight-color: transparent;
         }
-
         body {
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            font-family: 'Segoe UI', system-ui, sans-serif;
             background: #e8ecf1;
             color: var(--text);
-            min-height: 100vh;
             min-height: 100dvh;
             display: flex;
             justify-content: center;
             align-items: center;
             user-select: none;
             -webkit-user-select: none;
-            overflow-x: hidden;
             margin: 0;
-            padding: 0;
         }
-
         .app-container {
             width: 100%;
             max-width: 500px;
-            min-height: 100vh;
             min-height: 100dvh;
             background: #f8fafc;
             position: relative;
             overflow: hidden;
-            box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.04);
             display: flex;
             flex-direction: column;
+            box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.04);
         }
-
         @media (min-width: 501px) {
             .app-container {
-                min-height: 96vh;
                 min-height: 96dvh;
                 border-radius: 32px;
                 margin: 2vh auto;
-                max-height: 98vh;
-                overflow-y: auto;
-                box-shadow: var(--shadow-lg), 0 0 0 1px rgba(0, 0, 0, 0.06);
             }
         }
 
-        /* ============ SPLASH SCREEN ============ */
+        /* SPLASH */
         .splash-screen {
             position: absolute;
             inset: 0;
@@ -90,7 +69,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.45s ease;
+            transition: transform 0.55s, opacity 0.45s;
             padding: 2rem;
             text-align: center;
             cursor: pointer;
@@ -110,11 +89,8 @@
             justify-content: center;
             font-size: 56px;
             margin-bottom: 22px;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+            animation: floatLogo 3s infinite;
             border: 2px solid rgba(255, 255, 255, 0.22);
-            animation: floatLogo 3s ease-in-out infinite;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
         }
         @keyframes floatLogo {
             0%,
@@ -128,25 +104,21 @@
         .splash-title {
             font-size: 2.6rem;
             font-weight: 800;
-            color: #ffffff;
-            letter-spacing: -1px;
-            margin-bottom: 8px;
+            color: #fff;
         }
         .splash-title span {
             color: #fbbf24;
         }
         .splash-subtitle {
-            font-size: 0.95rem;
             color: rgba(255, 255, 255, 0.8);
-            font-weight: 400;
-            line-height: 1.5;
             max-width: 300px;
             margin-bottom: 24px;
+            font-size: 0.95rem;
         }
         .splash-features {
             display: flex;
-            flex-wrap: wrap;
             gap: 8px;
+            flex-wrap: wrap;
             justify-content: center;
             margin-bottom: 30px;
         }
@@ -156,16 +128,11 @@
             padding: 7px 15px;
             border-radius: 20px;
             font-size: 0.8rem;
-            font-weight: 500;
-            backdrop-filter: blur(4px);
-            -webkit-backdrop-filter: blur(4px);
-            border: 1px solid rgba(255, 255, 255, 0.14);
         }
         .splash-hint {
             color: rgba(255, 255, 255, 0.5);
             font-size: 0.75rem;
-            letter-spacing: 0.3px;
-            animation: fadeHint 2.5s ease-in-out infinite;
+            animation: fadeHint 2.5s infinite;
         }
         @keyframes fadeHint {
             0%,
@@ -177,21 +144,19 @@
             }
         }
 
-        /* ============ MAIN CONTENT ============ */
+        /* MAIN */
         .main-content {
             display: none;
-            flex-direction: column;
             flex: 1;
-            min-height: 100vh;
+            flex-direction: column;
             min-height: 100dvh;
         }
         .main-content.active {
             display: flex;
         }
 
-        /* Header */
         .app-header {
-            background: #ffffff;
+            background: #fff;
             padding: 14px 18px;
             display: flex;
             align-items: center;
@@ -200,7 +165,6 @@
             position: sticky;
             top: 0;
             z-index: 50;
-            gap: 10px;
             flex-shrink: 0;
         }
         .header-logo {
@@ -218,18 +182,14 @@
             justify-content: center;
             font-size: 22px;
             color: #fff;
-            flex-shrink: 0;
         }
         .header-title {
             font-weight: 700;
             font-size: 1.05rem;
-            color: var(--text);
-            line-height: 1.2;
         }
         .header-subtitle {
             font-size: 0.68rem;
             color: var(--text-light);
-            font-weight: 500;
         }
         .student-indicator {
             background: #eef2ff;
@@ -239,24 +199,18 @@
             font-size: 0.72rem;
             font-weight: 600;
             white-space: nowrap;
-            max-width: 110px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            cursor: default;
             border: 1px solid #e0e7ff;
-            flex-shrink: 0;
         }
         .student-indicator.hidden {
             display: none;
         }
 
-        /* Page Container */
         .page {
             display: none;
             flex: 1;
             flex-direction: column;
             padding: 14px 16px;
-            animation: fadeSlideIn 0.3s ease;
+            animation: fadeSlideIn 0.3s;
             overflow-y: auto;
         }
         .page.active {
@@ -273,7 +227,6 @@
             }
         }
 
-        /* Back Button */
         .back-btn {
             display: inline-flex;
             align-items: center;
@@ -284,19 +237,17 @@
             cursor: pointer;
             padding: 8px 12px;
             border-radius: 20px;
-            transition: all var(--transition);
             background: #eef2ff;
             border: none;
             align-self: flex-start;
             margin-bottom: 6px;
-            flex-shrink: 0;
         }
         .back-btn:active {
             background: #dde3ff;
             transform: scale(0.95);
         }
 
-        /* Scrolling Ticker on Dashboard */
+        /* TICKER */
         .ticker-container {
             background: #fff;
             border-radius: var(--radius-sm);
@@ -307,15 +258,12 @@
             align-items: center;
             gap: 8px;
             overflow: hidden;
-            position: relative;
         }
         .ticker-text {
             flex: 1;
             white-space: nowrap;
             overflow: hidden;
-            position: relative;
             font-weight: 500;
-            color: var(--text);
             font-size: 0.82rem;
         }
         .ticker-text span {
@@ -331,28 +279,12 @@
                 transform: translate(-100%, 0);
             }
         }
-        .ticker-edit-btn {
-            background: none;
-            border: none;
-            font-size: 16px;
-            cursor: pointer;
-            color: var(--text-light);
-            padding: 4px;
-            border-radius: 50%;
-            transition: all var(--transition);
-            flex-shrink: 0;
-        }
-        .ticker-edit-btn:active {
-            background: #f1f5f9;
-            transform: scale(0.9);
-        }
 
-        /* Menu Grid */
+        /* MENU GRID */
         .menu-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 12px;
-            padding: 2px 0;
         }
         .menu-card {
             background: var(--card-bg);
@@ -367,16 +299,12 @@
             align-items: center;
             text-align: center;
             gap: 8px;
-            position: relative;
-            overflow: hidden;
-            -webkit-tap-highlight-color: transparent;
         }
         .menu-card:active {
             transform: scale(0.95);
-            box-shadow: var(--shadow-md);
-            border-color: #e2e8f0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
         }
-        .menu-card .card-icon {
+        .card-icon {
             width: 48px;
             height: 48px;
             border-radius: 15px;
@@ -384,114 +312,50 @@
             align-items: center;
             justify-content: center;
             font-size: 24px;
-            position: relative;
-            z-index: 1;
-            flex-shrink: 0;
         }
-        .menu-card .card-icon.english {
+        .card-icon.english {
             background: #f3e8ff;
         }
-        .menu-card .card-icon.math {
+        .card-icon.math {
             background: #dbeafe;
         }
-        .menu-card .card-icon.reasoning {
+        .card-icon.reasoning {
             background: #fef3c7;
         }
-        .menu-card .card-icon.gk {
+        .card-icon.gk {
             background: #d1fae5;
         }
-        .menu-card .card-icon.computer {
+        .card-icon.computer {
             background: #fee2e2;
         }
-        .menu-card .card-icon.login-icon {
+        .card-icon.login {
             background: #eef2ff;
         }
-        .menu-card .card-icon.result-icon {
+        .card-icon.test {
+            background: #d1fae5;
+        }
+        .card-icon.result {
             background: #cffafe;
         }
-        .menu-card .card-label {
+        .card-label {
             font-weight: 700;
             font-size: 0.9rem;
-            color: var(--text);
-            position: relative;
-            z-index: 1;
         }
-        .menu-card .card-count {
+        .card-count {
             font-size: 0.68rem;
             color: var(--text-light);
-            font-weight: 500;
-            position: relative;
-            z-index: 1;
         }
-        .menu-card.login-highlight {
+        .menu-card.highlight {
             border: 2px dashed #c7d2fe;
-            background: linear-gradient(135deg, #fafaff 0%, #eef2ff 100%);
-        }
-        .menu-card.result-highlight {
-            border: 2px dashed #a5f3fc;
-            background: linear-gradient(135deg, #fafffe 0%, #ecfeff 100%);
+            background: linear-gradient(135deg, #fafaff, #eef2ff);
         }
 
-        /* Test & Result Page Cards */
-        .test-result-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-            margin-top: 12px;
-        }
-        .test-card {
-            background: #fff;
-            border-radius: var(--radius);
-            padding: 24px 20px;
-            box-shadow: var(--shadow-md);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            gap: 10px;
-            cursor: pointer;
-            transition: all var(--transition);
-            border: 2px solid transparent;
-            position: relative;
-        }
-        .test-card:active {
-            transform: scale(0.96);
-            border-color: #cbd5e1;
-        }
-        .test-card .tc-icon {
-            font-size: 42px;
-        }
-        .test-card .tc-label {
-            font-weight: 700;
-            font-size: 1.1rem;
-        }
-        .test-card .tc-sub {
-            font-size: 0.75rem;
-            color: var(--text-light);
-            word-break: break-all;
-            max-width: 100%;
-            padding: 0 4px;
-        }
-        .test-card .url-badge {
-            background: #f1f5f9;
-            padding: 3px 10px;
-            border-radius: 12px;
-            font-size: 0.65rem;
-            color: var(--text-light);
-            margin-top: 4px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            max-width: 90%;
-        }
-
-        /* Subject Detail Page */
+        /* SUBJECT PAGE */
         .subject-header {
             display: flex;
             align-items: center;
             gap: 12px;
             margin-bottom: 12px;
-            flex-shrink: 0;
         }
         .subject-icon-lg {
             width: 46px;
@@ -506,26 +370,13 @@
         .subject-title-lg {
             font-size: 1.2rem;
             font-weight: 800;
-            color: var(--text);
         }
-        .subject-subtitle {
-            font-size: 0.74rem;
-            color: var(--text-light);
-        }
-
-        /* Tabs */
         .tabs-container {
             display: flex;
             gap: 6px;
             overflow-x: auto;
             padding-bottom: 4px;
             margin-bottom: 10px;
-            scroll-behavior: smooth;
-            -webkit-overflow-scrolling: touch;
-            flex-shrink: 0;
-        }
-        .tabs-container::-webkit-scrollbar {
-            height: 0;
         }
         .tab-btn {
             flex-shrink: 0;
@@ -536,47 +387,32 @@
             font-size: 0.78rem;
             font-weight: 600;
             cursor: pointer;
-            white-space: nowrap;
-            transition: all var(--transition);
-            color: var(--text-light);
+            transition: all 0.2s;
         }
         .tab-btn.active {
             background: var(--primary);
             color: #fff;
             border-color: var(--primary);
-            box-shadow: 0 3px 10px rgba(79, 70, 229, 0.25);
         }
-        .tab-btn:active {
-            transform: scale(0.93);
-        }
-
-        /* Quiz List */
         .quiz-list {
             display: flex;
             flex-direction: column;
             gap: 8px;
-            flex: 1;
-            overflow-y: auto;
-            padding-bottom: 16px;
         }
         .quiz-card {
             background: #fff;
             border-radius: var(--radius-sm);
             padding: 13px 14px;
-            box-shadow: var(--shadow);
             display: flex;
             align-items: center;
             gap: 10px;
             cursor: pointer;
-            transition: all var(--transition);
-            border: 1.5px solid transparent;
+            box-shadow: var(--shadow);
         }
         .quiz-card:active {
             transform: scale(0.97);
-            border-color: #e2e8f0;
-            box-shadow: var(--shadow-md);
         }
-        .quiz-card .quiz-rank {
+        .quiz-rank {
             width: 32px;
             height: 32px;
             border-radius: 9px;
@@ -587,93 +423,69 @@
             font-weight: 700;
             font-size: 0.8rem;
             color: var(--text-light);
-            flex-shrink: 0;
         }
-        .quiz-card .quiz-info {
-            flex: 1;
-            min-width: 0;
-        }
-        .quiz-card .quiz-name {
+        .quiz-name {
             font-weight: 600;
             font-size: 0.85rem;
-            color: var(--text);
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-        .quiz-card .quiz-meta {
-            font-size: 0.66rem;
-            color: var(--text-light);
-            margin-top: 1px;
-        }
-        .quiz-card .quiz-arrow {
-            color: #cbd5e1;
-            font-size: 16px;
-            flex-shrink: 0;
-        }
-        .empty-state {
-            text-align: center;
-            padding: 40px 20px;
-            color: var(--text-light);
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-        .empty-state .empty-icon {
-            font-size: 48px;
-            margin-bottom: 10px;
-        }
-        .empty-state p {
-            font-size: 0.8rem;
         }
 
-        /* Student Login Page */
+        /* HORIZONTAL SCROLL CARDS */
+        .hscroll-container {
+            display: flex;
+            gap: 12px;
+            overflow-x: auto;
+            padding: 4px 0 12px;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+        }
+        .hscroll-card {
+            background: #fff;
+            border-radius: var(--radius-sm);
+            min-width: 160px;
+            max-width: 200px;
+            padding: 16px 14px;
+            box-shadow: var(--shadow);
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            flex-shrink: 0;
+        }
+        .hscroll-card:active {
+            transform: scale(0.95);
+        }
+        .hscroll-card .hcard-title {
+            font-weight: 700;
+            font-size: 0.85rem;
+        }
+        .hscroll-card .hcard-desc {
+            font-size: 0.7rem;
+            color: var(--text-light);
+        }
+
+        /* LOGIN */
         .login-card-wrapper {
             background: #fff;
             border-radius: var(--radius);
             padding: 26px 20px;
             width: 100%;
-            box-shadow: var(--shadow-md);
+            box-shadow: var(--shadow);
             text-align: center;
         }
         .login-card-wrapper h2 {
             font-weight: 800;
-            margin-bottom: 2px;
-            font-size: 1.3rem;
-        }
-        .login-card-wrapper .login-icon-big {
-            font-size: 48px;
-            margin-bottom: 8px;
-        }
-        .login-card-wrapper label {
-            display: block;
-            text-align: left;
-            font-size: 0.78rem;
-            font-weight: 600;
-            margin-bottom: 3px;
-            color: var(--text-light);
-            margin-top: 10px;
         }
         .login-card-wrapper input {
             width: 100%;
-            padding: 12px 14px;
+            padding: 12px;
             border-radius: 10px;
             border: 1.5px solid var(--border);
-            font-size: 0.9rem;
             background: #f8fafc;
-            transition: all var(--transition);
+            margin-top: 8px;
             font-family: inherit;
+            font-size: 0.9rem;
         }
-        .login-card-wrapper input:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.08);
-            background: #fff;
-        }
-
-        /* Buttons */
         .btn-primary {
             width: 100%;
             padding: 13px;
@@ -682,15 +494,12 @@
             color: #fff;
             border: none;
             font-weight: 700;
-            font-size: 0.9rem;
-            cursor: pointer;
-            transition: all var(--transition);
             margin-top: 14px;
-            letter-spacing: 0.2px;
+            cursor: pointer;
+            font-size: 0.9rem;
         }
         .btn-primary:active {
             background: var(--primary-dark);
-            transform: scale(0.95);
         }
         .btn-outline {
             width: 100%;
@@ -699,67 +508,12 @@
             background: #fff;
             color: #ef4444;
             border: 1.5px solid #fecaca;
-            font-weight: 600;
-            font-size: 0.82rem;
-            cursor: pointer;
-            transition: all var(--transition);
             margin-top: 8px;
-        }
-        .btn-outline:active {
-            background: #fef2f2;
-            transform: scale(0.95);
-        }
-
-        /* In-app Browser Modal */
-        .browser-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.6);
-            z-index: 200;
-            display: flex;
-            flex-direction: column;
-            animation: fadeIn 0.2s ease;
-        }
-        .browser-overlay.hidden {
-            display: none;
-        }
-        .browser-toolbar {
-            background: #fff;
-            padding: 10px 14px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            border-bottom: 1px solid var(--border);
-        }
-        .browser-url {
-            flex: 1;
-            font-size: 0.8rem;
-            color: var(--text-light);
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-        .browser-close {
-            background: none;
-            border: none;
-            font-size: 24px;
             cursor: pointer;
-            color: var(--text);
-            line-height: 1;
-        }
-        .browser-frame {
-            flex: 1;
-            width: 100%;
-            border: none;
-            background: #fff;
-        }
-        .browser-fallback {
-            text-align: center;
-            padding: 30px;
-            color: var(--text-light);
+            font-weight: 600;
         }
 
-        /* Toast */
+        /* TOAST */
         .toast {
             position: fixed;
             bottom: 80px;
@@ -770,34 +524,13 @@
             padding: 10px 22px;
             border-radius: 24px;
             font-size: 0.8rem;
-            font-weight: 600;
             z-index: 300;
-            pointer-events: none;
             opacity: 0;
             transition: opacity 0.3s;
-            white-space: nowrap;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+            pointer-events: none;
         }
         .toast.show {
             opacity: 1;
-        }
-
-        /* Spinner */
-        .spinner {
-            display: inline-block;
-            width: 18px;
-            height: 18px;
-            border: 2.5px solid rgba(255, 255, 255, 0.3);
-            border-top-color: #fff;
-            border-radius: 50%;
-            animation: spin 0.6s linear infinite;
-            margin-right: 6px;
-            vertical-align: middle;
-        }
-        @keyframes spin {
-            to {
-                transform: rotate(360deg);
-            }
         }
     </style>
 </head>
@@ -810,9 +543,8 @@
             <p class="splash-subtitle">Your ultimate companion for competitive exam preparation.</p>
             <div class="splash-features">
                 <span class="splash-feature-tag">📚 5 Subjects</span>
-                <span class="splash-feature-tag">📱 Mobile Ready</span>
-                <span class="splash-feature-tag">🔗 Quiz Links</span>
-                <span class="splash-feature-tag">📊 Results</span>
+                <span class="splash-feature-tag">📝 Tests</span>
+                <span class="splash-feature-tag">📈 Results</span>
             </div>
             <span class="splash-hint">— tap anywhere to continue —</span>
         </div>
@@ -830,48 +562,65 @@
                 <span class="student-indicator hidden" id="studentIndicator">👤 Guest</span>
             </header>
 
-            <!-- Dashboard Page -->
+            <!-- DASHBOARD -->
             <div class="page active" id="dashboardPage">
                 <div class="ticker-container">
-                    <div class="ticker-text">
-                        <span id="tickerContent">📢 Welcome to Quizmaster! Practice quizzes for English, Math, Reasoning, GK & Computer. New tests added regularly.</span>
-                    </div>
-                    <button class="ticker-edit-btn" id="tickerEditBtn" title="Edit scrolling text">✏️</button>
+                    <div class="ticker-text"><span id="tickerContent">📢 Welcome to Quizmaster! Practice for competitive exams. New quizzes added regularly.</span></div>
                 </div>
                 <div class="menu-grid">
-                    <div class="menu-card" onclick="openSubject('english')"><div class="card-icon english">📖</div><div class="card-label">English</div><div class="card-count" id="count-english">0 Quizzes</div></div>
-                    <div class="menu-card" onclick="openSubject('math')"><div class="card-icon math">🔢</div><div class="card-label">Math</div><div class="card-count" id="count-math">0 Quizzes</div></div>
-                    <div class="menu-card" onclick="openSubject('reasoning')"><div class="card-icon reasoning">🧩</div><div class="card-label">Reasoning</div><div class="card-count" id="count-reasoning">0 Quizzes</div></div>
-                    <div class="menu-card" onclick="openSubject('gk')"><div class="card-icon gk">🌍</div><div class="card-label">GK</div><div class="card-count" id="count-gk">0 Quizzes</div></div>
-                    <div class="menu-card" onclick="openSubject('computer')"><div class="card-icon computer">💻</div><div class="card-label">Computer</div><div class="card-count" id="count-computer">0 Quizzes</div></div>
-                    <div class="menu-card login-highlight" onclick="openStudentLogin()"><div class="card-icon login-icon">🎓</div><div class="card-label" id="loginCardLabel">Student Login</div><div class="card-count" id="loginCardSub">Register / Sign In</div></div>
-                    <div class="menu-card result-highlight" onclick="openTestResultPage()"><div class="card-icon result-icon">📊</div><div class="card-label">Test & Result</div><div class="card-count">Admin-Configured URLs</div></div>
+                    <div class="menu-card" onclick="openSubject('english')"><div class="card-icon english">📖</div><div class="card-label">English</div><div class="card-count" id="count-english">0</div></div>
+                    <div class="menu-card" onclick="openSubject('math')"><div class="card-icon math">🔢</div><div class="card-label">Math</div><div class="card-count" id="count-math">0</div></div>
+                    <div class="menu-card" onclick="openSubject('reasoning')"><div class="card-icon reasoning">🧩</div><div class="card-label">Reasoning</div><div class="card-count" id="count-reasoning">0</div></div>
+                    <div class="menu-card" onclick="openSubject('gk')"><div class="card-icon gk">🌍</div><div class="card-label">GK</div><div class="card-count" id="count-gk">0</div></div>
+                    <div class="menu-card" onclick="openSubject('computer')"><div class="card-icon computer">💻</div><div class="card-label">Computer</div><div class="card-count" id="count-computer">0</div></div>
+                    <div class="menu-card highlight" onclick="openStudentLogin()"><div class="card-icon login">🎓</div><div class="card-label" id="loginCardLabel">Student Login</div><div class="card-count" id="loginCardSub">Register / Sign In</div></div>
+                    <div class="menu-card" onclick="openTestPage()"><div class="card-icon test">📝</div><div class="card-label">Take a Test</div><div class="card-count">Practice tests</div></div>
+                    <div class="menu-card" onclick="openResultPage()"><div class="card-icon result">📈</div><div class="card-label">See Your Result</div><div class="card-count">Check scores</div></div>
                 </div>
             </div>
 
-            <!-- Subject Detail Page -->
+            <!-- SUBJECT PAGE -->
             <div class="page" id="subjectPage">
-                <button class="back-btn" onclick="goToDashboard()">← Back to Menu</button>
-                <div class="subject-header" style="margin-top:6px;">
+                <button class="back-btn" onclick="goToDashboard()">← Back</button>
+                <div class="subject-header">
                     <div class="subject-icon-lg" id="subjectIcon"></div>
                     <div><div class="subject-title-lg" id="subjectTitle"></div><div class="subject-subtitle" id="subjectSubtitle"></div></div>
                 </div>
                 <div class="tabs-container" id="tabsContainer"></div>
                 <div class="quiz-list" id="quizList"></div>
-                <div class="empty-state" id="emptyState" style="display:none;"><div class="empty-icon">📭</div><p>No quizzes in this tab yet.</p></div>
             </div>
 
-            <!-- Student Login Page -->
+            <!-- TEST PAGE -->
+            <div class="page" id="testPage">
+                <button class="back-btn" onclick="goToDashboard()">← Back</button>
+                <div style="margin:8px 0;">
+                    <h3 style="font-size:1.1rem;">📝 Take a Test</h3>
+                    <p style="font-size:0.72rem;color:var(--text-light);">Tap any card to start your practice test</p>
+                </div>
+                <div class="hscroll-container" id="testItemsContainer"></div>
+            </div>
+
+            <!-- RESULT PAGE -->
+            <div class="page" id="resultPage">
+                <button class="back-btn" onclick="goToDashboard()">← Back</button>
+                <div style="margin:8px 0;">
+                    <h3 style="font-size:1.1rem;">📈 See Your Result</h3>
+                    <p style="font-size:0.72rem;color:var(--text-light);">Tap any card to check your performance</p>
+                </div>
+                <div class="hscroll-container" id="resultItemsContainer"></div>
+            </div>
+
+            <!-- STUDENT LOGIN PAGE -->
             <div class="page" id="studentLoginPage">
                 <button class="back-btn" onclick="goToDashboard()">← Back</button>
-                <div style="flex:1;display:flex;align-items:center;justify-content:center;">
+                <div style="flex:1;display:flex;align-items:center;justify-content:center;padding:10px 0;">
                     <div class="login-card-wrapper">
-                        <div class="login-icon-big">🎓</div>
+                        <div style="font-size:48px;">🎓</div>
                         <h2>Student Login</h2>
-                        <p style="color:var(--text-light);font-size:0.8rem;margin-bottom:8px;">Enter your details to register</p>
-                        <label>Full Name</label>
+                        <p style="font-size:0.8rem;color:var(--text-light);margin-bottom:8px;">Enter your details to register</p>
+                        <label style="display:block;text-align:left;font-size:0.78rem;font-weight:600;color:var(--text-light);">Full Name</label>
                         <input type="text" id="studentName" placeholder="Enter your full name" autocomplete="name">
-                        <label>Mobile Number</label>
+                        <label style="display:block;text-align:left;font-size:0.78rem;font-weight:600;color:var(--text-light);margin-top:10px;">Mobile Number</label>
                         <input type="tel" id="studentMobile" placeholder="Enter 10-digit mobile number" maxlength="10" autocomplete="tel">
                         <button class="btn-primary" id="studentLoginBtn" onclick="handleStudentLogin()">🔐 Login / Register</button>
                         <button class="btn-outline" id="studentLogoutBtn" style="display:none;" onclick="handleStudentLogout()">🚪 Logout & Clear</button>
@@ -879,52 +628,21 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Test & Result Page (URLs from Firebase backend) -->
-            <div class="page" id="testResultPage">
-                <button class="back-btn" onclick="goToDashboard()">← Back</button>
-                <div style="margin-top:8px; font-weight:700; font-size:1.1rem;">📊 Test & Result</div>
-                <div class="test-result-grid">
-                    <div class="test-card" id="takeTestCard" onclick="openTestUrl()">
-                        <span class="tc-icon">📝</span>
-                        <span class="tc-label">Take a Test</span>
-                        <span class="tc-sub" id="testUrlSub">Loading...</span>
-                        <div class="url-badge" id="testUrlBadge">⏳ fetching from backend</div>
-                    </div>
-                    <div class="test-card" id="seeResultCard" onclick="openResultUrl()">
-                        <span class="tc-icon">📈</span>
-                        <span class="tc-label">See Your Result</span>
-                        <span class="tc-sub" id="resultUrlSub">Loading...</span>
-                        <div class="url-badge" id="resultUrlBadge">⏳ fetching from backend</div>
-                    </div>
-                </div>
-                <p style="text-align:center;font-size:0.7rem;color:var(--text-light);margin-top:16px;">
-                    Links are configured by admin via Firebase backend.
-                </p>
-            </div>
         </div>
 
-        <!-- In-app Browser -->
-        <div class="browser-overlay hidden" id="browserOverlay">
-            <div class="browser-toolbar">
-                <div class="browser-url" id="browserUrlDisplay"></div>
-                <button class="browser-close" onclick="closeBrowser()">✕</button>
-            </div>
-            <iframe class="browser-frame" id="browserFrame" sandbox="allow-scripts allow-same-origin allow-forms allow-popups"></iframe>
-            <div class="browser-fallback hidden" id="browserFallback">
-                <p>⚠️ This site cannot be displayed inside the app.</p>
-                <button class="btn-primary" style="width:auto; padding:10px 24px;" onclick="openExternalCurrent()">Open in Browser</button>
-            </div>
-        </div>
+        <!-- TOAST -->
         <div class="toast" id="toast"></div>
     </div>
 
-    <!-- Firebase SDKs -->
-    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js">
+    </script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js">
+    </script>
 
     <script>
         (function() {
+            // ============ FIREBASE INIT ============
             const firebaseConfig = {
                 apiKey: "AIzaSyBFsiY4iOZ9-QKnZ_inrudYTAJ0F_Usht0",
                 authDomain: "manoj-demo-4d34f.firebaseapp.com",
@@ -934,328 +652,519 @@
 
             let firebaseDB = null;
             let firebaseReady = false;
+
             try {
                 firebase.initializeApp(firebaseConfig);
                 firebaseDB = firebase.database();
                 firebaseReady = true;
-            } catch (e) {
-                console.warn('Firebase init error:', e.message);
+                console.log('✅ Firebase connected');
+            } catch (err) {
+                console.warn('⚠️ Firebase init error:', err.message);
             }
 
-            // Global variables for test/result URLs (set by Firebase or localStorage)
-            let currentTestUrl = localStorage.getItem('quizmaster_test_url') || 'https://www.examenglish.com/';
-            let currentResultUrl = localStorage.getItem('quizmaster_result_url') || 'https://www.indiabix.com/';
+            // ============ STORAGE KEYS ============
+            const APP_KEY = 'quizmaster_data_v4';
+            const STUDENT_KEY = 'quizmaster_student';
+            const TICKER_KEY = 'quizmaster_ticker';
+            const TEST_ITEMS_KEY = 'quizmaster_test_items';
+            const RESULT_ITEMS_KEY = 'quizmaster_result_items';
 
-            // ============ APP DATA ============
-            const APP_KEY = 'quizmaster_data_v3';
-            const STUDENT_KEY = 'quizmaster_student_session';
-            const TICKER_KEY = 'quizmaster_ticker_text';
+            // ============ DEFAULT DATA ============
             const defaultData = {
-                english: { tabs: ['Vocabulary','Grammar','Comprehension','Error Spotting'], quizzes: { 'Vocabulary':[{name:'Synonyms Quiz 1',url:'https://www.englishclub.com/esl-quizzes/vocabulary/synonyms-1.php'},{name:'Antonyms Practice',url:'https://www.usingenglish.com/quizzes/antonyms/'}],'Grammar':[{name:'Tenses Quiz',url:'https://www.englishgrammar.org/tenses-quiz/'}],'Comprehension':[{name:'Reading Comp 1',url:'https://www.ereadingworksheets.com/free-reading-worksheets/reading-comprehension-worksheets/'}],'Error Spotting':[{name:'Spot the Error Set 1',url:'https://www.examenglish.com/grammar/error_detection.htm'}] } },
-                math: { tabs: ['Arithmetic','Algebra','Geometry','Data Interpretation'], quizzes: { 'Arithmetic':[{name:'Percentage Quiz',url:'https://www.math-only-math.com/percentage-quiz.html'}],'Algebra':[{name:'Algebra Basics',url:'https://www.khanacademy.org/math/algebra'}],'Geometry':[{name:'Geometry Formulas Quiz',url:'https://www.proprofs.com/quiz-school/topic/geometry'}],'Data Interpretation':[{name:'DI Practice Set',url:'https://www.indiabix.com/data-interpretation/questions-and-answers/'}] } },
-                reasoning: { tabs: ['Verbal','Non-Verbal','Analytical','Logical'], quizzes: { 'Verbal':[{name:'Verbal Reasoning 1',url:'https://www.verbalreasoningtest.org/'}],'Non-Verbal':[{name:'Non-Verbal Patterns',url:'https://www.nonverbalreasoning.com/'}],'Analytical':[{name:'Analytical Thinking',url:'https://www.assessmentday.co.uk/analytical-reasoning.htm'}],'Logical':[{name:'Logic Puzzles',url:'https://www.brainzilla.com/logic/logic-grid/'}] } },
-                gk: { tabs: ['History','Geography','Polity','Science'], quizzes: { 'History':[{name:'Indian History Quiz',url:'https://www.gktoday.in/quizbase/indian-history-quiz/'}],'Geography':[{name:'World Geography',url:'https://www.geographyquiz.org/'}],'Polity':[{name:'Indian Polity MCQs',url:'https://www.jagranjosh.com/general-knowledge/indian-polity-quiz'}],'Science':[{name:'General Science',url:'https://www.sciencequiz.net/'}] } },
-                computer: { tabs: ['Fundamentals','MS Office','Internet','Programming'], quizzes: { 'Fundamentals':[{name:'Computer Basics',url:'https://www.tutorialspoint.com/computer_fundamentals/computer_fundamentals_online_quiz.htm'}],'MS Office':[{name:'MS Word Quiz',url:'https://www.proprofs.com/quiz-school/topic/microsoft-word'}],'Internet':[{name:'Internet & Networking',url:'https://www.networkingquiz.org/'}],'Programming':[{name:'Programming Basics',url:'https://www.w3schools.com/quiztest/'}] } }
+                english: {
+                    tabs: ['Vocabulary', 'Grammar', 'Comprehension', 'Error Spotting'],
+                    quizzes: {
+                        'Vocabulary': [
+                            { name: 'Synonyms Quiz',
+                                url: 'https://learnodishahelp-cmd.github.io/Quizmaster4/' },
+                            { name: 'Antonyms Practice',
+                                url: 'https://learnodishahelp-cmd.github.io/Quizmaster4/' },
+                            { name: 'Word Power Test',
+                            url: 'https://www.vocabulary.com/lists/quiz/' },
+                        ],
+                        'Grammar': [
+                            { name: 'Tenses Quiz',
+                            url: 'https://learnodishahelp-cmd.github.io/Quizmaster4/' },
+                            { name: 'Prepositions MCQs',
+                                url: 'https://www.grammarbank.com/prepositions-quiz.html' },
+                        ],
+                        'Comprehension': [
+                            { name: 'Reading Comp 1',
+                                url: 'https://www.ereadingworksheets.com/free-reading-worksheets/reading-comprehension-worksheets/' },
+                        ],
+                        'Error Spotting': [
+                            { name: 'Spot the Error',
+                                url: 'https://www.examenglish.com/grammar/error_detection.htm' },
+                            { name: 'Common Errors',
+                                url: 'https://www.englishpractice.com/quiz/common-errors-quiz/' },
+                        ],
+                    }
+                },
+                math: {
+                    tabs: ['Arithmetic', 'Algebra', 'Geometry', 'Data Interpretation'],
+                    quizzes: {
+                        'Arithmetic': [
+                            { name: 'Percentage Quiz',
+                            url: 'https://learnodishahelp-cmd.github.io/Quizmaster4/' },
+                            { name: 'Profit & Loss',
+                            url: 'https://www.indiabix.com/aptitude/profit-and-loss/' },
+                        ],
+                        'Algebra': [
+                            { name: 'Algebra Basics',
+                            url: 'https://www.khanacademy.org/math/algebra' },
+                        ],
+                        'Geometry': [
+                            { name: 'Geometry Quiz',
+                                url: 'https://www.proprofs.com/quiz-school/topic/geometry' },
+                        ],
+                        'Data Interpretation': [
+                            { name: 'DI Practice',
+                                url: 'https://www.indiabix.com/data-interpretation/questions-and-answers/' },
+                        ],
+                    }
+                },
+                reasoning: {
+                    tabs: ['Verbal', 'Non-Verbal', 'Analytical', 'Logical'],
+                    quizzes: {
+                        'Verbal': [
+                            { name: 'Verbal Reasoning',
+                            url: 'https://www.verbalreasoningtest.org/' },
+                            { name: 'Blood Relations',
+                                url: 'https://www.indiabix.com/verbal-reasoning/blood-relation/' },
+                        ],
+                        'Non-Verbal': [
+                            { name: 'Non-Verbal Patterns',
+                            url: 'https://www.nonverbalreasoning.com/' },
+                        ],
+                        'Analytical': [
+                            { name: 'Analytical Thinking',
+                                url: 'https://www.assessmentday.co.uk/analytical-reasoning.htm' },
+                        ],
+                        'Logical': [
+                            { name: 'Logic Puzzles',
+                            url: 'https://www.brainzilla.com/logic/logic-grid/' },
+                            { name: 'Syllogisms',
+                                url: 'https://www.indiabix.com/logical-reasoning/syllogism/' },
+                        ],
+                    }
+                },
+                gk: {
+                    tabs: ['History', 'Geography', 'Polity', 'Science'],
+                    quizzes: {
+                        'History': [
+                            { name: 'Indian History',
+                                url: 'https://www.gktoday.in/quizbase/indian-history-quiz/' },
+                        ],
+                        'Geography': [
+                            { name: 'World Geography',
+                            url: 'https://www.geographyquiz.org/' },
+                            { name: 'Indian Rivers',
+                                url: 'https://www.jagranjosh.com/general-knowledge/indian-rivers-quiz' },
+                        ],
+                        'Polity': [
+                            { name: 'Indian Polity',
+                                url: 'https://www.jagranjosh.com/general-knowledge/indian-polity-quiz' },
+                        ],
+                        'Science': [
+                            { name: 'General Science',
+                            url: 'https://www.sciencequiz.net/' },
+                        ],
+                    }
+                },
+                computer: {
+                    tabs: ['Fundamentals', 'MS Office', 'Internet', 'Programming'],
+                    quizzes: {
+                        'Fundamentals': [
+                            { name: 'Computer Basics',
+                                url: 'https://www.tutorialspoint.com/computer_fundamentals/computer_fundamentals_online_quiz.htm' },
+                        ],
+                        'MS Office': [
+                            { name: 'MS Word Quiz',
+                            url: 'https://www.proprofs.com/quiz-school/topic/microsoft-word' },
+                            { name: 'Excel Shortcuts',
+                                url: 'https://www.excel-easy.com/quiz/shortcuts.html' },
+                        ],
+                        'Internet': [
+                            { name: 'Internet & Networking',
+                            url: 'https://www.networkingquiz.org/' },
+                        ],
+                        'Programming': [
+                            { name: 'Programming Basics',
+                            url: 'https://www.w3schools.com/quiztest/' },
+                        ],
+                    }
+                }
             };
+
+            const defaultTestItems = [
+                { name: "English Mock Test", desc: "Full syllabus English practice",
+                    url: "https://learnodishahelp-cmd.github.io/Quizmaster4/" },
+                { name: "Math Aptitude", desc: "Quantitative aptitude test",
+                url: "https://www.indiabix.com/aptitude/" },
+                { name: "Reasoning Ability", desc: "Logical & analytical reasoning",
+                    url: "https://www.indiabix.com/logical-reasoning/" },
+                { name: "GK Test", desc: "General knowledge assessment",
+                url: "https://www.gktoday.in/quizbase/" },
+            ];
+
+            const defaultResultItems = [
+                { name: "Score Check", desc: "View your latest scores",
+                url: "https://learnodishahelp-cmd.github.io/Quizmaster4/" },
+                { name: "Rank Predictor", desc: "Check your expected rank",
+                url: "https://www.indiabix.com/" },
+                { name: "Performance Report", desc: "Detailed subject-wise analysis",
+                    url: "https://www.indiabix.com/" },
+            ];
+
             let appData = {};
             let currentStudent = null;
             let currentSubject = null;
             let currentTab = null;
-            let currentBrowserUrl = '';
 
-            // DOM elements
-            const splashScreen = document.getElementById('splashScreen');
-            const mainContent = document.getElementById('mainContent');
-            const dashboardPage = document.getElementById('dashboardPage');
-            const subjectPage = document.getElementById('subjectPage');
-            const studentLoginPage = document.getElementById('studentLoginPage');
-            const testResultPage = document.getElementById('testResultPage');
-            const headerSubtitle = document.getElementById('headerSubtitle');
-            const studentIndicator = document.getElementById('studentIndicator');
-            const tabsContainer = document.getElementById('tabsContainer');
-            const quizList = document.getElementById('quizList');
-            const emptyState = document.getElementById('emptyState');
-            const subjectIcon = document.getElementById('subjectIcon');
-            const subjectTitle = document.getElementById('subjectTitle');
-            const subjectSubtitle = document.getElementById('subjectSubtitle');
-            const toast = document.getElementById('toast');
-            const studentNameInput = document.getElementById('studentName');
-            const studentMobileInput = document.getElementById('studentMobile');
-            const studentLoginBtn = document.getElementById('studentLoginBtn');
-            const studentLogoutBtn = document.getElementById('studentLogoutBtn');
-            const loginCardLabel = document.getElementById('loginCardLabel');
-            const loginCardSub = document.getElementById('loginCardSub');
-            const loginStatus = document.getElementById('loginStatus');
-            const tickerContent = document.getElementById('tickerContent');
-            const tickerEditBtn = document.getElementById('tickerEditBtn');
-            const browserOverlay = document.getElementById('browserOverlay');
-            const browserFrame = document.getElementById('browserFrame');
-            const browserUrlDisplay = document.getElementById('browserUrlDisplay');
-            const browserFallback = document.getElementById('browserFallback');
-            const testUrlSub = document.getElementById('testUrlSub');
-            const testUrlBadge = document.getElementById('testUrlBadge');
-            const resultUrlSub = document.getElementById('resultUrlSub');
-            const resultUrlBadge = document.getElementById('resultUrlBadge');
+            // ============ DOM HELPERS ============
+            const $ = (id) => document.getElementById(id);
 
-            // ============ DATA LOAD/SAVE ============
+            // ============ LOAD DATA ============
             function loadData() {
                 const stored = localStorage.getItem(APP_KEY);
                 if (stored) {
                     try {
                         appData = JSON.parse(stored);
-                        for (const key of Object.keys(defaultData)) {
-                            if (!appData[key]) appData[key] = JSON.parse(JSON.stringify(defaultData[key]));
-                            if (!appData[key].tabs) appData[key].tabs = [...defaultData[key].tabs];
-                            if (!appData[key].quizzes) appData[key].quizzes = JSON.parse(JSON.stringify(defaultData[key].quizzes));
-                            for (const tab of appData[key].tabs) {
-                                if (!appData[key].quizzes[tab]) appData[key].quizzes[tab] = [];
-                            }
-                        }
-                    } catch (e) { appData = JSON.parse(JSON.stringify(defaultData)); }
+                    } catch (e) {
+                        appData = JSON.parse(JSON.stringify(defaultData));
+                    }
                 } else {
                     appData = JSON.parse(JSON.stringify(defaultData));
-                    saveData();
                 }
-                const session = sessionStorage.getItem(STUDENT_KEY);
-                if (session) { try { currentStudent = JSON.parse(session); } catch (e) { currentStudent = null; } }
+                // Ensure all subjects exist
+                for (const key of Object.keys(defaultData)) {
+                    if (!appData[key]) appData[key] = JSON.parse(JSON.stringify(defaultData[key]));
+                    if (!appData[key].tabs) appData[key].tabs = [...defaultData[key].tabs];
+                    if (!appData[key].quizzes) appData[key].quizzes = JSON.parse(JSON.stringify(defaultData[key]
+                        .quizzes));
+                    for (const tab of appData[key].tabs) {
+                        if (!appData[key].quizzes[tab]) appData[key].quizzes[tab] = [];
+                    }
+                }
+                saveData();
+
+                // Ticker
                 const savedTicker = localStorage.getItem(TICKER_KEY);
-                if (savedTicker) tickerContent.textContent = savedTicker;
+                if (savedTicker) $('tickerContent').textContent = savedTicker;
+
+                // Student session
+                const session = sessionStorage.getItem(STUDENT_KEY);
+                if (session) {
+                    try {
+                        currentStudent = JSON.parse(session);
+                    } catch (e) {
+                        currentStudent = null;
+                    }
+                }
+
+                // Test/Result items
+                if (!localStorage.getItem(TEST_ITEMS_KEY)) localStorage.setItem(TEST_ITEMS_KEY, JSON.stringify(
+                    defaultTestItems));
+                if (!localStorage.getItem(RESULT_ITEMS_KEY)) localStorage.setItem(RESULT_ITEMS_KEY, JSON.stringify(
+                    defaultResultItems));
             }
 
-            function saveData() { localStorage.setItem(APP_KEY, JSON.stringify(appData)); }
+            function saveData() {
+                localStorage.setItem(APP_KEY, JSON.stringify(appData));
+            }
 
-            function updateAllCounts() {
-                for (const subject of ['english','math','reasoning','gk','computer']) {
-                    const el = document.getElementById('count-' + subject);
-                    if (el && appData[subject]) {
+            function updateCounts() {
+                for (const s of ['english', 'math', 'reasoning', 'gk', 'computer']) {
+                    const el = document.getElementById('count-' + s);
+                    if (el && appData[s]) {
                         let total = 0;
-                        for (const tab of appData[subject].tabs) total += (appData[subject].quizzes[tab] || []).length;
+                        for (const t of appData[s].tabs) total += (appData[s].quizzes[t] || []).length;
                         el.textContent = total + ' Quiz' + (total !== 1 ? 'zes' : '');
                     }
                 }
             }
 
-            // ============ FIREBASE CONFIG FETCH ============
-            function fetchConfigFromFirebase() {
-                if (!firebaseReady || !firebaseDB) {
-                    updateTestResultUI();
-                    return;
+            function updateStudentUI() {
+                if (currentStudent) {
+                    $('studentIndicator').classList.remove('hidden');
+                    $('studentIndicator').textContent = '👤 ' + currentStudent.name.split(' ')[0];
+                    $('loginCardLabel').textContent = 'Logged In';
+                    $('loginCardSub').textContent = currentStudent.name;
+                    $('studentLogoutBtn').style.display = 'block';
+                    $('studentName').value = currentStudent.name;
+                    $('studentMobile').value = currentStudent.mobile;
+                } else {
+                    $('studentIndicator').classList.add('hidden');
+                    $('studentIndicator').textContent = '👤 Guest';
+                    $('loginCardLabel').textContent = 'Student Login';
+                    $('loginCardSub').textContent = 'Register / Sign In';
+                    $('studentLogoutBtn').style.display = 'none';
+                    $('studentName').value = '';
+                    $('studentMobile').value = '';
                 }
-                const configRef = firebaseDB.ref('config');
-                configRef.on('value', (snapshot) => {
-                    const config = snapshot.val() || {};
-                    let testUrl = config.testUrl;
-                    let resultUrl = config.resultUrl;
-                    if (testUrl && typeof testUrl === 'string') {
-                        currentTestUrl = testUrl;
-                        localStorage.setItem('quizmaster_test_url', testUrl);
+            }
+
+            // ============ SPLASH ============
+            let splashDone = false;
+
+            function hideSplash() {
+                if (splashDone) return;
+                splashDone = true;
+                $('splashScreen').classList.add('hidden');
+                $('mainContent').classList.add('active');
+                updateCounts();
+                updateStudentUI();
+                clearTimeout(splashTimer);
+            }
+            $('splashScreen').addEventListener('click', hideSplash);
+            $('splashScreen').addEventListener('touchend', function(e) {
+                e.preventDefault();
+                hideSplash();
+            });
+            let splashTimer = setTimeout(() => {
+                if (!splashDone) hideSplash();
+            }, 4000);
+
+            // ============ NAVIGATION ============
+            function showPage(page) {
+                [$('dashboardPage'), $('subjectPage'), $('testPage'), $('resultPage'), $('studentLoginPage')]
+                .forEach(p => p.classList.remove('active'));
+                page.classList.add('active');
+            }
+
+            window.goToDashboard = function() {
+                showPage($('dashboardPage'));
+                $('headerSubtitle').textContent = 'Dashboard';
+                updateCounts();
+                updateStudentUI();
+            };
+
+            window.openSubject = function(subj) {
+                currentSubject = subj;
+                const data = appData[subj];
+                const info = {
+                    english: { name: 'English', icon: '📖', bg: '#f3e8ff' },
+                    math: { name: 'Math', icon: '🔢', bg: '#dbeafe' },
+                    reasoning: { name: 'Reasoning', icon: '🧩', bg: '#fef3c7' },
+                    gk: { name: 'GK', icon: '🌍', bg: '#d1fae5' },
+                    computer: { name: 'Computer', icon: '💻', bg: '#fee2e2' },
+                } [subj];
+                $('subjectIcon').textContent = info.icon;
+                $('subjectIcon').style.background = info.bg;
+                $('subjectTitle').textContent = info.name;
+                $('subjectSubtitle').textContent = info.name + ' quizzes';
+                $('headerSubtitle').textContent = info.name;
+
+                const tabsContainer = $('tabsContainer');
+                tabsContainer.innerHTML = '';
+                data.tabs.forEach((tab, idx) => {
+                    const btn = document.createElement('button');
+                    btn.className = 'tab-btn';
+                    btn.textContent = tab;
+                    btn.addEventListener('click', () => selectTab(tab, btn));
+                    tabsContainer.appendChild(btn);
+                    if (idx === 0) {
+                        btn.classList.add('active');
+                        currentTab = tab;
+                        renderQuizzes(subj, tab);
                     }
-                    if (resultUrl && typeof resultUrl === 'string') {
-                        currentResultUrl = resultUrl;
-                        localStorage.setItem('quizmaster_result_url', resultUrl);
-                    }
-                    updateTestResultUI();
-                }, (error) => {
-                    console.warn('Firebase config read error:', error.message);
-                    updateTestResultUI();
+                });
+                if (data.tabs.length > 0) {
+                    currentTab = data.tabs[0];
+                    renderQuizzes(subj, data.tabs[0]);
+                }
+                showPage($('subjectPage'));
+            };
+
+            function selectTab(tab, btn) {
+                currentTab = tab;
+                $('tabsContainer').querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                renderQuizzes(currentSubject, tab);
+            }
+
+            function renderQuizzes(subj, tab) {
+                const list = $('quizList');
+                list.innerHTML = '';
+                const quizzes = appData[subj].quizzes[tab] || [];
+                quizzes.forEach((q, i) => {
+                    const card = document.createElement('div');
+                    card.className = 'quiz-card';
+                    card.innerHTML =
+                        `<div class="quiz-rank">${i + 1}</div><div class="quiz-info"><div class="quiz-name">${escapeHTML(q.name)}</div></div><span style="color:#cbd5e1;">→</span>`;
+                    card.addEventListener('click', () => openInWebView(q.url));
+                    list.appendChild(card);
                 });
             }
 
-            function updateTestResultUI() {
-                testUrlSub.textContent = currentTestUrl.length > 40 ? currentTestUrl.substring(0,40)+'…' : currentTestUrl;
-                testUrlBadge.textContent = currentTestUrl;
-                resultUrlSub.textContent = currentResultUrl.length > 40 ? currentResultUrl.substring(0,40)+'…' : currentResultUrl;
-                resultUrlBadge.textContent = currentResultUrl;
+            // ============ OPEN URL IN DEVICE BROWSER ============
+            function openInWebView(url) {
+                if (!url.startsWith('http://') && !url.startsWith('https://')) {
+                    url = 'https://' + url;
+                }
+                // Use window.open with target=_blank to open in device's default browser
+                window.open(url, '_blank', 'noopener,noreferrer');
             }
 
-            window.openTestUrl = function() {
-                if (currentTestUrl) openInAppBrowser(currentTestUrl);
-                else showToast('⚠️ Test URL not set');
+            // ============ TEST & RESULT PAGES ============
+            function renderHorizontalItems(containerId, itemsKey) {
+                const container = document.getElementById(containerId);
+                const items = JSON.parse(localStorage.getItem(itemsKey) || '[]');
+                container.innerHTML = '';
+                items.forEach((item) => {
+                    const card = document.createElement('div');
+                    card.className = 'hscroll-card';
+                    card.innerHTML =
+                        `<div class="hcard-title">${escapeHTML(item.name)}</div><div class="hcard-desc">${escapeHTML(item.desc)}</div>`;
+                    card.addEventListener('click', () => openInWebView(item.url));
+                    container.appendChild(card);
+                });
+            }
+
+            window.openTestPage = function() {
+                $('headerSubtitle').textContent = 'Take a Test';
+                renderHorizontalItems('testItemsContainer', TEST_ITEMS_KEY);
+                showPage($('testPage'));
             };
-            window.openResultUrl = function() {
-                if (currentResultUrl) openInAppBrowser(currentResultUrl);
-                else showToast('⚠️ Result URL not set');
+
+            window.openResultPage = function() {
+                $('headerSubtitle').textContent = 'See Your Result';
+                renderHorizontalItems('resultItemsContainer', RESULT_ITEMS_KEY);
+                showPage($('resultPage'));
             };
 
             // ============ STUDENT LOGIN ============
             window.handleStudentLogin = async function() {
-                const name = studentNameInput.value.trim();
-                const mobile = studentMobileInput.value.trim();
-                if (!name || name.length < 2) { showToast('⚠️ Enter valid name'); studentNameInput.focus(); return; }
-                if (!mobile || !/^\d{10}$/.test(mobile)) { showToast('⚠️ Enter valid 10-digit mobile'); studentMobileInput.focus(); return; }
-                studentLoginBtn.disabled = true;
-                studentLoginBtn.innerHTML = '<span class="spinner"></span> Saving...';
-                loginStatus.textContent = 'Connecting...';
-                const studentData = { name, mobile, timestamp: new Date().toISOString() };
-                let firebaseSaved = false;
-                if (firebaseReady && firebaseDB) {
-                    try { await firebaseDB.ref('login').push(studentData); firebaseSaved = true; } catch (e) { console.warn(e); }
+                const name = $('studentName').value.trim();
+                const mobile = $('studentMobile').value.trim();
+
+                if (!name || name.length < 2) {
+                    showToast('⚠️ Please enter a valid name');
+                    $('studentName').focus();
+                    return;
                 }
+                if (!mobile || !/^\d{10}$/.test(mobile)) {
+                    showToast('⚠️ Please enter a valid 10-digit mobile number');
+                    $('studentMobile').focus();
+                    return;
+                }
+
+                // Disable button and show loading
+                const btn = $('studentLoginBtn');
+                btn.disabled = true;
+                btn.textContent = '⏳ Saving...';
+                $('loginStatus').textContent = 'Connecting to cloud...';
+
+                const studentData = {
+                    name: name,
+                    mobile: mobile,
+                    timestamp: new Date().toISOString(),
+                };
+
+                let savedToCloud = false;
+
+                // Save to Firebase
+                if (firebaseReady && firebaseDB) {
+                    try {
+                        const newRef = await firebaseDB.ref('login').push(studentData);
+                        savedToCloud = true;
+                        console.log('✅ Student saved to Firebase with key:', newRef.key);
+                    } catch (err) {
+                        console.error('❌ Firebase save error:', err.message);
+                        savedToCloud = false;
+                    }
+                } else {
+                    console.warn('⚠️ Firebase not available, saving locally only');
+                    savedToCloud = false;
+                }
+
+                // Save locally in session
                 currentStudent = { name, mobile };
                 sessionStorage.setItem(STUDENT_KEY, JSON.stringify(currentStudent));
+
+                // Update UI
                 updateStudentUI();
-                studentLoginBtn.disabled = false;
-                studentLoginBtn.innerHTML = '🔐 Login / Register';
-                loginStatus.textContent = firebaseSaved ? '✅ Saved to cloud!' : '⚠️ Saved locally';
-                showToast('✅ Welcome, ' + name.split(' ')[0] + '!');
-                setTimeout(goToDashboard, 1000);
+                btn.disabled = false;
+                btn.textContent = '🔐 Login / Register';
+
+                if (savedToCloud) {
+                    $('loginStatus').textContent = '✅ Successfully saved to cloud!';
+                    showToast('✅ Welcome, ' + name.split(' ')[0] + '! Data saved to cloud.');
+                } else {
+                    $('loginStatus').textContent = '⚠️ Saved locally (cloud unavailable).';
+                    showToast('✅ Welcome, ' + name.split(' ')[0] + '! (Saved locally)');
+                }
+
+                // Auto-navigate to dashboard
+                setTimeout(() => {
+                    goToDashboard();
+                }, 1000);
             };
+
             window.handleStudentLogout = function() {
                 currentStudent = null;
                 sessionStorage.removeItem(STUDENT_KEY);
                 updateStudentUI();
-                loginStatus.textContent = 'Data is securely saved to cloud.';
-                studentLoginBtn.innerHTML = '🔐 Login / Register';
-                studentLoginBtn.disabled = false;
-                showToast('👋 Logged out');
-                setTimeout(goToDashboard, 400);
+                $('loginStatus').textContent = 'Data is securely saved to cloud.';
+                $('studentLoginBtn').disabled = false;
+                $('studentLoginBtn').textContent = '🔐 Login / Register';
+                showToast('👋 Logged out successfully');
+                setTimeout(() => goToDashboard(), 400);
             };
 
-            function updateStudentUI() {
-                if (currentStudent) {
-                    studentIndicator.classList.remove('hidden');
-                    studentIndicator.textContent = '👤 ' + currentStudent.name.split(' ')[0];
-                    loginCardLabel.textContent = 'Logged In';
-                    loginCardSub.textContent = currentStudent.name;
-                    studentLogoutBtn.style.display = 'block';
-                    studentNameInput.value = currentStudent.name;
-                    studentMobileInput.value = currentStudent.mobile;
-                } else {
-                    studentIndicator.classList.add('hidden');
-                    loginCardLabel.textContent = 'Student Login';
-                    loginCardSub.textContent = 'Register / Sign In';
-                    studentLogoutBtn.style.display = 'none';
-                    studentNameInput.value = '';
-                    studentMobileInput.value = '';
-                }
-            }
-
-            // ============ NAVIGATION ============
-            function showPage(page) {
-                [dashboardPage, subjectPage, studentLoginPage, testResultPage].forEach(p => p.classList.remove('active'));
-                page.classList.add('active');
-                if (page === dashboardPage) { headerSubtitle.textContent = 'Dashboard'; updateAllCounts(); updateStudentUI(); }
-                if (page === studentLoginPage) { headerSubtitle.textContent = 'Student Login'; updateStudentUI(); }
-                if (page === testResultPage) { headerSubtitle.textContent = 'Test & Result'; }
-            }
-            window.goToDashboard = () => showPage(dashboardPage);
-            window.openStudentLogin = () => { updateStudentUI(); showPage(studentLoginPage); };
-            window.openTestResultPage = () => showPage(testResultPage);
-            window.openSubject = function(subject) {
-                currentSubject = subject;
-                const info = {
-                    english: {name:'English',icon:'📖',bg:'#f3e8ff',subtitle:'Vocabulary, Grammar & more'},
-                    math: {name:'Math',icon:'🔢',bg:'#dbeafe',subtitle:'Arithmetic, Algebra & more'},
-                    reasoning: {name:'Reasoning',icon:'🧩',bg:'#fef3c7',subtitle:'Verbal, Non-Verbal & Logical'},
-                    gk: {name:'GK',icon:'🌍',bg:'#d1fae5',subtitle:'History, Geography, Polity & Science'},
-                    computer: {name:'Computer',icon:'💻',bg:'#fee2e2',subtitle:'Fundamentals, MS Office & more'},
-                }[subject];
-                subjectIcon.textContent = info.icon; subjectIcon.style.background = info.bg;
-                subjectTitle.textContent = info.name; subjectSubtitle.textContent = info.subtitle;
-                headerSubtitle.textContent = info.name;
-                tabsContainer.innerHTML = '';
-                appData[subject].tabs.forEach((tab, idx) => {
-                    const btn = document.createElement('button');
-                    btn.className = 'tab-btn'; btn.textContent = tab;
-                    btn.addEventListener('click', () => selectTab(tab, btn));
-                    tabsContainer.appendChild(btn);
-                    if (idx === 0) { btn.classList.add('active'); currentTab = tab; renderQuizzes(subject, tab); }
-                });
-                showPage(subjectPage);
+            window.openStudentLogin = function() {
+                updateStudentUI();
+                showPage($('studentLoginPage'));
+                $('headerSubtitle').textContent = 'Student Login';
             };
-            function selectTab(tab, btnEl) {
-                currentTab = tab;
-                tabsContainer.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-                btnEl.classList.add('active');
-                renderQuizzes(currentSubject, tab);
-            }
-            function renderQuizzes(subject, tab) {
-                const quizzes = appData[subject].quizzes[tab] || [];
-                quizList.innerHTML = '';
-                if (quizzes.length === 0) { emptyState.style.display = 'flex'; quizList.style.display = 'none'; }
-                else {
-                    emptyState.style.display = 'none'; quizList.style.display = 'flex';
-                    quizzes.forEach((q, idx) => {
-                        const card = document.createElement('div');
-                        card.className = 'quiz-card';
-                        card.innerHTML = `<div class="quiz-rank">${idx+1}</div><div class="quiz-info"><div class="quiz-name">${escapeHTML(q.name)}</div><div class="quiz-meta">Tap to open in-app →</div></div><span class="quiz-arrow">→</span>`;
-                        card.addEventListener('click', () => openInAppBrowser(q.url));
-                        quizList.appendChild(card);
-                    });
-                }
-            }
-
-            // ============ IN-APP BROWSER ============
-            window.openInAppBrowser = function(url) {
-                if (!url.startsWith('http')) url = 'https://' + url;
-                currentBrowserUrl = url;
-                browserUrlDisplay.textContent = url;
-                browserFrame.src = url;
-                browserFallback.classList.add('hidden');
-                browserFrame.classList.remove('hidden');
-                browserOverlay.classList.remove('hidden');
-                const fallbackTimer = setTimeout(() => {
-                    try {
-                        if (browserFrame.contentDocument && browserFrame.contentDocument.body && browserFrame.contentDocument.body.innerHTML.length < 50) {
-                            browserFallback.classList.remove('hidden'); browserFrame.classList.add('hidden');
-                        }
-                    } catch(e) {}
-                }, 3000);
-                browserFrame.onload = () => clearTimeout(fallbackTimer);
-            };
-            window.closeBrowser = function() { browserOverlay.classList.add('hidden'); browserFrame.src = 'about:blank'; };
-            window.openExternalCurrent = function() { window.open(currentBrowserUrl, '_blank', 'noopener'); closeBrowser(); };
-
-            // ============ TICKER EDIT ============
-            tickerEditBtn.addEventListener('click', () => {
-                const newText = prompt('Enter scrolling announcement text:', tickerContent.textContent);
-                if (newText && newText.trim()) {
-                    tickerContent.textContent = newText.trim();
-                    localStorage.setItem(TICKER_KEY, newText.trim());
-                    showToast('📢 Ticker updated');
-                }
-            });
 
             // ============ TOAST ============
             let toastTimer;
-            function showToast(msg) {
-                toast.textContent = msg; toast.classList.add('show');
-                clearTimeout(toastTimer); toastTimer = setTimeout(() => toast.classList.remove('show'), 2400);
-            }
-            function escapeHTML(str) { const d = document.createElement('div'); d.textContent = str; return d.innerHTML; }
 
-            // ============ SPLASH ============
-            let splashDismissed = false;
-            function hideSplash() {
-                if (splashDismissed) return;
-                splashDismissed = true;
-                splashScreen.classList.add('hidden');
-                mainContent.classList.add('active');
-                updateAllCounts();
-                updateStudentUI();
-                clearTimeout(splashAutoTimer);
+            function showToast(msg) {
+                const t = $('toast');
+                t.textContent = msg;
+                t.classList.add('show');
+                clearTimeout(toastTimer);
+                toastTimer = setTimeout(() => t.classList.remove('show'), 2400);
             }
-            splashScreen.addEventListener('click', hideSplash);
-            splashScreen.addEventListener('touchend', (e) => { e.preventDefault(); hideSplash(); });
-            let splashAutoTimer = setTimeout(() => { if (!splashDismissed) hideSplash(); }, 4000);
+
+            // ============ HELPERS ============
+            function escapeHTML(str) {
+                const div = document.createElement('div');
+                div.textContent = str;
+                return div.innerHTML;
+            }
+
+            // ============ KEYBOARD ESCAPE ============
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    const activePage = document.querySelector('.page.active');
+                    if (activePage && activePage.id !== 'dashboardPage') {
+                        goToDashboard();
+                    }
+                }
+            });
 
             // ============ INIT ============
             loadData();
-            updateAllCounts();
+            updateCounts();
             updateStudentUI();
-            fetchConfigFromFirebase();
-            updateTestResultUI();
-            const splashSeen = sessionStorage.getItem('splash_seen_v4');
-            if (splashSeen === 'true') { clearTimeout(splashAutoTimer); splashAutoTimer = setTimeout(() => { if (!splashDismissed) hideSplash(); }, 600); }
-            sessionStorage.setItem('splash_seen_v4', 'true');
 
-            // Escape key to close browser or go back
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape') {
-                    if (!browserOverlay.classList.contains('hidden')) closeBrowser();
-                    else if (subjectPage.classList.contains('active') || studentLoginPage.classList.contains('active') || testResultPage.classList.contains('active')) goToDashboard();
-                }
-            });
+            const splashSeen = sessionStorage.getItem('splash_seen_v5');
+            if (splashSeen === 'true') {
+                clearTimeout(splashTimer);
+                splashTimer = setTimeout(() => {
+                    if (!splashDone) hideSplash();
+                }, 600);
+            }
+            sessionStorage.setItem('splash_seen_v5', 'true');
+
+            console.log('🧠 Quizmaster Ready!');
+            console.log('📚 Subjects: English, Math, Reasoning, GK, Computer');
+            console.log('📝 Test & Result pages with horizontal cards');
+            console.log('☁️ Firebase:', firebaseReady ? 'Connected' : 'Not connected');
+            console.log('🌐 All links open in device browser (web view)');
         })();
     </script>
 </body>
