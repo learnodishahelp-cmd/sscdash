@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
     <title>Quizmaster - Competitive Exam Quizzes</title>
     <style>
+        /* ... (styles unchanged, same as before) ... */
         :root {
             --primary: #4f46e5;
             --primary-dark: #3730a3;
@@ -18,520 +19,72 @@
             --radius-sm: 12px;
             --transition: 0.2s;
         }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        html {
-            height: 100%;
-            -webkit-tap-highlight-color: transparent;
-        }
-        body {
-            font-family: 'Segoe UI', system-ui, sans-serif;
-            background: #e8ecf1;
-            color: var(--text);
-            min-height: 100dvh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            user-select: none;
-            -webkit-user-select: none;
-            margin: 0;
-        }
-        .app-container {
-            width: 100%;
-            max-width: 500px;
-            min-height: 100dvh;
-            background: #f8fafc;
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.04);
-        }
-        @media (min-width: 501px) {
-            .app-container {
-                min-height: 96dvh;
-                border-radius: 32px;
-                margin: 2vh auto;
-            }
-        }
-
-        /* SPLASH */
-        .splash-screen {
-            position: absolute;
-            inset: 0;
-            z-index: 200;
-            background: linear-gradient(160deg, #1e1b4b 0%, #312e81 30%, #4f46e5 65%, #6366f1 100%);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            transition: transform 0.55s, opacity 0.45s;
-            padding: 2rem;
-            text-align: center;
-            cursor: pointer;
-        }
-        .splash-screen.hidden {
-            transform: translateY(-110%);
-            opacity: 0;
-            pointer-events: none;
-        }
-        .splash-logo {
-            width: 110px;
-            height: 110px;
-            background: rgba(255, 255, 255, 0.12);
-            border-radius: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 56px;
-            margin-bottom: 22px;
-            animation: floatLogo 3s infinite;
-            border: 2px solid rgba(255, 255, 255, 0.22);
-        }
-        @keyframes floatLogo {
-            0%,
-            100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-16px);
-            }
-        }
-        .splash-title {
-            font-size: 2.6rem;
-            font-weight: 800;
-            color: #fff;
-        }
-        .splash-title span {
-            color: #fbbf24;
-        }
-        .splash-subtitle {
-            color: rgba(255, 255, 255, 0.8);
-            max-width: 300px;
-            margin-bottom: 24px;
-            font-size: 0.95rem;
-        }
-        .splash-features {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-            justify-content: center;
-            margin-bottom: 30px;
-        }
-        .splash-feature-tag {
-            background: rgba(255, 255, 255, 0.11);
-            color: #e2e8f0;
-            padding: 7px 15px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-        }
-        .splash-hint {
-            color: rgba(255, 255, 255, 0.5);
-            font-size: 0.75rem;
-            animation: fadeHint 2.5s infinite;
-        }
-        @keyframes fadeHint {
-            0%,
-            100% {
-                opacity: 0.4;
-            }
-            50% {
-                opacity: 0.85;
-            }
-        }
-
-        /* MAIN */
-        .main-content {
-            display: none;
-            flex: 1;
-            flex-direction: column;
-            min-height: 100dvh;
-        }
-        .main-content.active {
-            display: flex;
-        }
-
-        .app-header {
-            background: #fff;
-            padding: 14px 18px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            border-bottom: 1px solid var(--border);
-            position: sticky;
-            top: 0;
-            z-index: 50;
-            flex-shrink: 0;
-        }
-        .header-logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .header-logo-icon {
-            width: 40px;
-            height: 40px;
-            background: var(--primary);
-            border-radius: 13px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 22px;
-            color: #fff;
-        }
-        .header-title {
-            font-weight: 700;
-            font-size: 1.05rem;
-        }
-        .header-subtitle {
-            font-size: 0.68rem;
-            color: var(--text-light);
-        }
-        .student-indicator {
-            background: #eef2ff;
-            color: #4f46e5;
-            padding: 7px 13px;
-            border-radius: 16px;
-            font-size: 0.72rem;
-            font-weight: 600;
-            white-space: nowrap;
-            border: 1px solid #e0e7ff;
-        }
-        .student-indicator.hidden {
-            display: none;
-        }
-
-        .page {
-            display: none;
-            flex: 1;
-            flex-direction: column;
-            padding: 14px 16px;
-            animation: fadeSlideIn 0.3s;
-            overflow-y: auto;
-        }
-        .page.active {
-            display: flex;
-        }
-        @keyframes fadeSlideIn {
-            from {
-                opacity: 0;
-                transform: translateY(14px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .back-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: var(--primary);
-            cursor: pointer;
-            padding: 8px 12px;
-            border-radius: 20px;
-            background: #eef2ff;
-            border: none;
-            align-self: flex-start;
-            margin-bottom: 6px;
-        }
-        .back-btn:active {
-            background: #dde3ff;
-            transform: scale(0.95);
-        }
-
-        /* TICKER */
-        .ticker-container {
-            background: #fff;
-            border-radius: var(--radius-sm);
-            padding: 10px 14px;
-            margin-bottom: 14px;
-            box-shadow: var(--shadow);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            overflow: hidden;
-        }
-        .ticker-text {
-            flex: 1;
-            white-space: nowrap;
-            overflow: hidden;
-            font-weight: 500;
-            font-size: 0.82rem;
-        }
-        .ticker-text span {
-            display: inline-block;
-            padding-left: 100%;
-            animation: marquee 18s linear infinite;
-        }
-        @keyframes marquee {
-            0% {
-                transform: translate(0, 0);
-            }
-            100% {
-                transform: translate(-100%, 0);
-            }
-        }
-
-        /* MENU GRID */
-        .menu-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-        }
-        .menu-card {
-            background: var(--card-bg);
-            border-radius: var(--radius);
-            padding: 18px 14px;
-            cursor: pointer;
-            border: 1.5px solid transparent;
-            transition: all var(--transition);
-            box-shadow: var(--shadow);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            gap: 8px;
-        }
-        .menu-card:active {
-            transform: scale(0.95);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-        }
-        .card-icon {
-            width: 48px;
-            height: 48px;
-            border-radius: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-        }
-        .card-icon.english {
-            background: #f3e8ff;
-        }
-        .card-icon.math {
-            background: #dbeafe;
-        }
-        .card-icon.reasoning {
-            background: #fef3c7;
-        }
-        .card-icon.gk {
-            background: #d1fae5;
-        }
-        .card-icon.computer {
-            background: #fee2e2;
-        }
-        .card-icon.login {
-            background: #eef2ff;
-        }
-        .card-icon.test {
-            background: #d1fae5;
-        }
-        .card-icon.result {
-            background: #cffafe;
-        }
-        .card-label {
-            font-weight: 700;
-            font-size: 0.9rem;
-        }
-        .card-count {
-            font-size: 0.68rem;
-            color: var(--text-light);
-        }
-        .menu-card.highlight {
-            border: 2px dashed #c7d2fe;
-            background: linear-gradient(135deg, #fafaff, #eef2ff);
-        }
-
-        /* SUBJECT PAGE */
-        .subject-header {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 12px;
-        }
-        .subject-icon-lg {
-            width: 46px;
-            height: 46px;
-            border-radius: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            flex-shrink: 0;
-        }
-        .subject-title-lg {
-            font-size: 1.2rem;
-            font-weight: 800;
-        }
-        .tabs-container {
-            display: flex;
-            gap: 6px;
-            overflow-x: auto;
-            padding-bottom: 4px;
-            margin-bottom: 10px;
-        }
-        .tab-btn {
-            flex-shrink: 0;
-            padding: 8px 15px;
-            border-radius: 20px;
-            border: 1.5px solid var(--border);
-            background: #fff;
-            font-size: 0.78rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .tab-btn.active {
-            background: var(--primary);
-            color: #fff;
-            border-color: var(--primary);
-        }
-        .quiz-list {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-        .quiz-card {
-            background: #fff;
-            border-radius: var(--radius-sm);
-            padding: 13px 14px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            cursor: pointer;
-            box-shadow: var(--shadow);
-        }
-        .quiz-card:active {
-            transform: scale(0.97);
-        }
-        .quiz-rank {
-            width: 32px;
-            height: 32px;
-            border-radius: 9px;
-            background: #f1f5f9;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 0.8rem;
-            color: var(--text-light);
-        }
-        .quiz-name {
-            font-weight: 600;
-            font-size: 0.85rem;
-        }
-
-        /* HORIZONTAL SCROLL CARDS */
-        .hscroll-container {
-            display: flex;
-            gap: 12px;
-            overflow-x: auto;
-            padding: 4px 0 12px;
-            scroll-behavior: smooth;
-            -webkit-overflow-scrolling: touch;
-        }
-        .hscroll-card {
-            background: #fff;
-            border-radius: var(--radius-sm);
-            min-width: 160px;
-            max-width: 200px;
-            padding: 16px 14px;
-            box-shadow: var(--shadow);
-            cursor: pointer;
-            transition: all 0.2s;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            flex-shrink: 0;
-        }
-        .hscroll-card:active {
-            transform: scale(0.95);
-        }
-        .hscroll-card .hcard-title {
-            font-weight: 700;
-            font-size: 0.85rem;
-        }
-        .hscroll-card .hcard-desc {
-            font-size: 0.7rem;
-            color: var(--text-light);
-        }
-
-        /* LOGIN */
-        .login-card-wrapper {
-            background: #fff;
-            border-radius: var(--radius);
-            padding: 26px 20px;
-            width: 100%;
-            box-shadow: var(--shadow);
-            text-align: center;
-        }
-        .login-card-wrapper h2 {
-            font-weight: 800;
-        }
-        .login-card-wrapper input {
-            width: 100%;
-            padding: 12px;
-            border-radius: 10px;
-            border: 1.5px solid var(--border);
-            background: #f8fafc;
-            margin-top: 8px;
-            font-family: inherit;
-            font-size: 0.9rem;
-        }
-        .btn-primary {
-            width: 100%;
-            padding: 13px;
-            border-radius: 12px;
-            background: var(--primary);
-            color: #fff;
-            border: none;
-            font-weight: 700;
-            margin-top: 14px;
-            cursor: pointer;
-            font-size: 0.9rem;
-        }
-        .btn-primary:active {
-            background: var(--primary-dark);
-        }
-        .btn-outline {
-            width: 100%;
-            padding: 12px;
-            border-radius: 12px;
-            background: #fff;
-            color: #ef4444;
-            border: 1.5px solid #fecaca;
-            margin-top: 8px;
-            cursor: pointer;
-            font-weight: 600;
-        }
-
-        /* TOAST */
-        .toast {
-            position: fixed;
-            bottom: 80px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #1e293b;
-            color: #fff;
-            padding: 10px 22px;
-            border-radius: 24px;
-            font-size: 0.8rem;
-            z-index: 300;
-            opacity: 0;
-            transition: opacity 0.3s;
-            pointer-events: none;
-        }
-        .toast.show {
-            opacity: 1;
-        }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        html { height:100%; -webkit-tap-highlight-color:transparent; }
+        body { font-family: 'Segoe UI', system-ui, sans-serif; background: #e8ecf1; color: var(--text); min-height: 100dvh; display: flex; justify-content: center; align-items: center; user-select: none; -webkit-user-select: none; margin: 0; }
+        .app-container { width: 100%; max-width: 500px; min-height: 100dvh; background: #f8fafc; position: relative; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 0 0 1px rgba(0,0,0,0.04); }
+        @media (min-width: 501px) { .app-container { min-height: 96dvh; border-radius: 32px; margin: 2vh auto; } }
+        .splash-screen { position: absolute; inset: 0; z-index: 200; background: linear-gradient(160deg, #1e1b4b 0%, #312e81 30%, #4f46e5 65%, #6366f1 100%); display: flex; flex-direction: column; align-items: center; justify-content: center; transition: transform 0.55s, opacity 0.45s; padding: 2rem; text-align: center; cursor: pointer; }
+        .splash-screen.hidden { transform: translateY(-110%); opacity: 0; pointer-events: none; }
+        .splash-logo { width: 110px; height: 110px; background: rgba(255,255,255,0.12); border-radius: 30px; display: flex; align-items: center; justify-content: center; font-size: 56px; margin-bottom: 22px; animation: floatLogo 3s infinite; border: 2px solid rgba(255,255,255,0.22); }
+        @keyframes floatLogo { 0%,100%{ transform: translateY(0); } 50%{ transform: translateY(-16px); } }
+        .splash-title { font-size: 2.6rem; font-weight: 800; color: #fff; }
+        .splash-title span { color: #fbbf24; }
+        .splash-subtitle { color: rgba(255,255,255,0.8); max-width: 300px; margin-bottom: 24px; font-size: 0.95rem; }
+        .splash-features { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin-bottom: 30px; }
+        .splash-feature-tag { background: rgba(255,255,255,0.11); color: #e2e8f0; padding: 7px 15px; border-radius: 20px; font-size: 0.8rem; }
+        .splash-hint { color: rgba(255,255,255,0.5); font-size: 0.75rem; animation: fadeHint 2.5s infinite; }
+        @keyframes fadeHint { 0%,100%{ opacity: 0.4; } 50%{ opacity: 0.85; } }
+        .main-content { display: none; flex: 1; flex-direction: column; min-height: 100dvh; }
+        .main-content.active { display: flex; }
+        .app-header { background: #fff; padding: 14px 18px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 50; flex-shrink: 0; }
+        .header-logo { display: flex; align-items: center; gap: 10px; }
+        .header-logo-icon { width: 40px; height: 40px; background: var(--primary); border-radius: 13px; display: flex; align-items: center; justify-content: center; font-size: 22px; color: #fff; }
+        .header-title { font-weight: 700; font-size: 1.05rem; }
+        .header-subtitle { font-size: 0.68rem; color: var(--text-light); }
+        .student-indicator { background: #eef2ff; color: #4f46e5; padding: 7px 13px; border-radius: 16px; font-size: 0.72rem; font-weight: 600; white-space: nowrap; border: 1px solid #e0e7ff; }
+        .student-indicator.hidden { display: none; }
+        .page { display: none; flex: 1; flex-direction: column; padding: 14px 16px; animation: fadeSlideIn 0.3s; overflow-y: auto; }
+        .page.active { display: flex; }
+        @keyframes fadeSlideIn { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+        .back-btn { display: inline-flex; align-items: center; gap: 4px; font-size: 0.85rem; font-weight: 600; color: var(--primary); cursor: pointer; padding: 8px 12px; border-radius: 20px; background: #eef2ff; border: none; align-self: flex-start; margin-bottom: 6px; }
+        .back-btn:active { background: #dde3ff; transform: scale(0.95); }
+        .ticker-container { background: #fff; border-radius: var(--radius-sm); padding: 10px 14px; margin-bottom: 14px; box-shadow: var(--shadow); display: flex; align-items: center; gap: 8px; overflow: hidden; }
+        .ticker-text { flex: 1; white-space: nowrap; overflow: hidden; font-weight: 500; font-size: 0.82rem; }
+        .ticker-text span { display: inline-block; padding-left: 100%; animation: marquee 18s linear infinite; }
+        @keyframes marquee { 0%{ transform: translate(0,0); } 100%{ transform: translate(-100%,0); } }
+        .menu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .menu-card { background: var(--card-bg); border-radius: var(--radius); padding: 18px 14px; cursor: pointer; border: 1.5px solid transparent; transition: all var(--transition); box-shadow: var(--shadow); display: flex; flex-direction: column; align-items: center; text-align: center; gap: 8px; }
+        .menu-card:active { transform: scale(0.95); box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+        .card-icon { width: 48px; height: 48px; border-radius: 15px; display: flex; align-items: center; justify-content: center; font-size: 24px; }
+        .card-icon.english{background:#f3e8ff;} .card-icon.math{background:#dbeafe;} .card-icon.reasoning{background:#fef3c7;} .card-icon.gk{background:#d1fae5;} .card-icon.computer{background:#fee2e2;} .card-icon.login{background:#eef2ff;} .card-icon.test{background:#d1fae5;} .card-icon.result{background:#cffafe;}
+        .card-label { font-weight: 700; font-size: 0.9rem; }
+        .card-count { font-size: 0.68rem; color: var(--text-light); }
+        .menu-card.highlight { border: 2px dashed #c7d2fe; background: linear-gradient(135deg, #fafaff, #eef2ff); }
+        .subject-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+        .subject-icon-lg { width: 46px; height: 46px; border-radius: 15px; display: flex; align-items: center; justify-content: center; font-size: 24px; flex-shrink: 0; }
+        .subject-title-lg { font-size: 1.2rem; font-weight: 800; }
+        .tabs-container { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 4px; margin-bottom: 10px; }
+        .tab-btn { flex-shrink: 0; padding: 8px 15px; border-radius: 20px; border: 1.5px solid var(--border); background: #fff; font-size: 0.78rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+        .tab-btn.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+        .quiz-list { display: flex; flex-direction: column; gap: 8px; }
+        .quiz-card { background: #fff; border-radius: var(--radius-sm); padding: 13px 14px; display: flex; align-items: center; gap: 10px; cursor: pointer; box-shadow: var(--shadow); }
+        .quiz-card:active { transform: scale(0.97); }
+        .quiz-rank { width: 32px; height: 32px; border-radius: 9px; background: #f1f5f9; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.8rem; color: var(--text-light); }
+        .quiz-name { font-weight: 600; font-size: 0.85rem; }
+        .hscroll-container { display: flex; gap: 12px; overflow-x: auto; padding: 4px 0 12px; scroll-behavior: smooth; -webkit-overflow-scrolling: touch; }
+        .hscroll-card { background: #fff; border-radius: var(--radius-sm); min-width: 160px; max-width: 200px; padding: 16px 14px; box-shadow: var(--shadow); cursor: pointer; transition: all 0.2s; display: flex; flex-direction: column; gap: 8px; flex-shrink: 0; }
+        .hscroll-card:active { transform: scale(0.95); }
+        .hscroll-card .hcard-title { font-weight: 700; font-size: 0.85rem; }
+        .hscroll-card .hcard-desc { font-size: 0.7rem; color: var(--text-light); }
+        .login-card-wrapper { background: #fff; border-radius: var(--radius); padding: 26px 20px; width: 100%; box-shadow: var(--shadow); text-align: center; }
+        .login-card-wrapper h2 { font-weight: 800; }
+        .login-card-wrapper input { width: 100%; padding: 12px; border-radius: 10px; border: 1.5px solid var(--border); background: #f8fafc; margin-top: 8px; font-family: inherit; font-size: 0.9rem; }
+        .btn-primary { width: 100%; padding: 13px; border-radius: 12px; background: var(--primary); color: #fff; border: none; font-weight: 700; margin-top: 14px; cursor: pointer; font-size: 0.9rem; }
+        .btn-primary:active { background: var(--primary-dark); }
+        .btn-outline { width: 100%; padding: 12px; border-radius: 12px; background: #fff; color: #ef4444; border: 1.5px solid #fecaca; margin-top: 8px; cursor: pointer; font-weight: 600; }
+        .toast { position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%); background: #1e293b; color: #fff; padding: 10px 22px; border-radius: 24px; font-size: 0.8rem; z-index: 300; opacity: 0; transition: opacity 0.3s; pointer-events: none; }
+        .toast.show { opacity: 1; }
     </style>
 </head>
 <body>
@@ -635,10 +188,8 @@
     </div>
 
     <!-- Firebase SDK -->
-    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js">
-    </script>
-    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js">
-    </script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
 
     <script>
         (function() {
@@ -652,53 +203,45 @@
 
             let firebaseDB = null;
             let firebaseReady = false;
-
             try {
                 firebase.initializeApp(firebaseConfig);
                 firebaseDB = firebase.database();
                 firebaseReady = true;
-                console.log('✅ Firebase connected');
             } catch (err) {
-                console.warn('⚠️ Firebase init error:', err.message);
+                console.warn('Firebase init error:', err.message);
             }
+
+            // ============ DATA VERSION – INCREASE THIS NUMBER WHEN YOU CHANGE DEFAULT DATA ============
+            const DATA_VERSION = 3;  // <-- Change this whenever you modify defaultData below
 
             // ============ STORAGE KEYS ============
             const APP_KEY = 'quizmaster_data_v4';
+            const VERSION_KEY = 'quizmaster_data_version';
             const STUDENT_KEY = 'quizmaster_student';
             const TICKER_KEY = 'quizmaster_ticker';
             const TEST_ITEMS_KEY = 'quizmaster_test_items';
             const RESULT_ITEMS_KEY = 'quizmaster_result_items';
 
-            // ============ DEFAULT DATA ============
+            // ============ DEFAULT DATA (EDIT YOUR URLS HERE) ============
             const defaultData = {
                 english: {
                     tabs: ['Vocabulary', 'Grammar', 'Comprehension', 'Error Spotting'],
                     quizzes: {
                         'Vocabulary': [
-                            { name: 'Synonyms Quiz',
-                                url: 'https://learnodishahelp-cmd.github.io/ssceng1/' },
-                            { name: 'Antonyms Practice',
-                                url: 'https://learnodishahelp-cmd.github.io/ssceng2/' },
-                            { name: 'Vocabs',
-                            url: 'https://learnodishahelp-cmd.github.io/ssceng4/' },
-                            { name: 'Word Power Test',
-                            url: 'https://learnodishahelp-cmd.github.io/ssceng3/' },
+                            { name: 'Synonyms Quiz', url: 'https://learnodishahelp-cmd.github.io/ssceng1/' },
+                            { name: 'Antonyms Practice', url: 'https://learnodishahelp-cmd.github.io/ssceng2/' },
+                            { name: 'Word Power Test', url: 'https://learnodishahelp-cmd.github.io/ssceng3/' },
                         ],
                         'Grammar': [
-                            { name: 'Tenses Quiz',
-                            url: 'https://learnodishahelp-cmd.github.io/ssceng5/' },
-                           // { name: 'Prepositions MCQs',
-                            //    url: 'https://www.grammarbank.com/prepositions-quiz.html' },
+                            { name: 'Tenses Quiz', url: 'https://learnodishahelp-cmd.github.io/ssceng4/' },
+                            { name: 'Prepositions MCQs', url: 'https://learnodishahelp-cmd.github.io/ssceng5/' },
                         ],
-                       'Comprehension': [
-                           // { name: 'Reading Comp 1',
-                             //   url: 'https://www.ereadingworksheets.com/free-reading-worksheets/reading-comprehension-worksheets/' },
+                        'Comprehension': [
+                            { name: 'Reading Comp 1', url: 'https://www.ereadingworksheets.com/free-reading-worksheets/reading-comprehension-worksheets/' },
                         ],
                         'Error Spotting': [
-                           // { name: 'Spot the Error',
-                              //  url: 'https://www.examenglish.com/grammar/error_detection.htm' },
-                           // { name: 'Common Errors',
-                             //   url: 'https://www.englishpractice.com/quiz/common-errors-quiz/' },
+                            { name: 'Spot the Error', url: 'https://www.examenglish.com/grammar/error_detection.htm' },
+                            { name: 'Common Errors', url: 'https://www.englishpractice.com/quiz/common-errors-quiz/' },
                         ],
                     }
                 },
@@ -706,22 +249,17 @@
                     tabs: ['Arithmetic', 'Algebra', 'Geometry', 'Data Interpretation'],
                     quizzes: {
                         'Arithmetic': [
-                            { name: 'Percentage Quiz',
-                            url: 'https://www.math-only-math.com/percentage-quiz.html' },
-                            { name: 'Profit & Loss',
-                            url: 'https://www.indiabix.com/aptitude/profit-and-loss/' },
+                            { name: 'Percentage Quiz', url: 'https://www.math-only-math.com/percentage-quiz.html' },
+                            { name: 'Profit & Loss', url: 'https://www.indiabix.com/aptitude/profit-and-loss/' },
                         ],
                         'Algebra': [
-                            { name: 'Algebra Basics',
-                            url: 'https://www.khanacademy.org/math/algebra' },
+                            { name: 'Algebra Basics', url: 'https://www.khanacademy.org/math/algebra' },
                         ],
                         'Geometry': [
-                            { name: 'Geometry Quiz',
-                                url: 'https://www.proprofs.com/quiz-school/topic/geometry' },
+                            { name: 'Geometry Quiz', url: 'https://www.proprofs.com/quiz-school/topic/geometry' },
                         ],
                         'Data Interpretation': [
-                            { name: 'DI Practice',
-                                url: 'https://www.indiabix.com/data-interpretation/questions-and-answers/' },
+                            { name: 'DI Practice', url: 'https://www.indiabix.com/data-interpretation/questions-and-answers/' },
                         ],
                     }
                 },
@@ -729,24 +267,18 @@
                     tabs: ['Verbal', 'Non-Verbal', 'Analytical', 'Logical'],
                     quizzes: {
                         'Verbal': [
-                            { name: 'Verbal Reasoning',
-                            url: 'https://www.verbalreasoningtest.org/' },
-                            { name: 'Blood Relations',
-                                url: 'https://www.indiabix.com/verbal-reasoning/blood-relation/' },
+                            { name: 'Verbal Reasoning', url: 'https://www.verbalreasoningtest.org/' },
+                            { name: 'Blood Relations', url: 'https://www.indiabix.com/verbal-reasoning/blood-relation/' },
                         ],
                         'Non-Verbal': [
-                            { name: 'Non-Verbal Patterns',
-                            url: 'https://www.nonverbalreasoning.com/' },
+                            { name: 'Non-Verbal Patterns', url: 'https://www.nonverbalreasoning.com/' },
                         ],
                         'Analytical': [
-                            { name: 'Analytical Thinking',
-                                url: 'https://www.assessmentday.co.uk/analytical-reasoning.htm' },
+                            { name: 'Analytical Thinking', url: 'https://www.assessmentday.co.uk/analytical-reasoning.htm' },
                         ],
                         'Logical': [
-                            { name: 'Logic Puzzles',
-                            url: 'https://www.brainzilla.com/logic/logic-grid/' },
-                            { name: 'Syllogisms',
-                                url: 'https://www.indiabix.com/logical-reasoning/syllogism/' },
+                            { name: 'Logic Puzzles', url: 'https://www.brainzilla.com/logic/logic-grid/' },
+                            { name: 'Syllogisms', url: 'https://www.indiabix.com/logical-reasoning/syllogism/' },
                         ],
                     }
                 },
@@ -754,22 +286,17 @@
                     tabs: ['History', 'Geography', 'Polity', 'Science'],
                     quizzes: {
                         'History': [
-                            { name: 'Indian History',
-                                url: 'https://www.gktoday.in/quizbase/indian-history-quiz/' },
+                            { name: 'Indian History', url: 'https://www.gktoday.in/quizbase/indian-history-quiz/' },
                         ],
                         'Geography': [
-                            { name: 'World Geography',
-                            url: 'https://www.geographyquiz.org/' },
-                            { name: 'Indian Rivers',
-                                url: 'https://www.jagranjosh.com/general-knowledge/indian-rivers-quiz' },
+                            { name: 'World Geography', url: 'https://www.geographyquiz.org/' },
+                            { name: 'Indian Rivers', url: 'https://www.jagranjosh.com/general-knowledge/indian-rivers-quiz' },
                         ],
                         'Polity': [
-                            { name: 'Indian Polity',
-                                url: 'https://www.jagranjosh.com/general-knowledge/indian-polity-quiz' },
+                            { name: 'Indian Polity', url: 'https://www.jagranjosh.com/general-knowledge/indian-polity-quiz' },
                         ],
                         'Science': [
-                            { name: 'General Science',
-                            url: 'https://www.sciencequiz.net/' },
+                            { name: 'General Science', url: 'https://www.sciencequiz.net/' },
                         ],
                     }
                 },
@@ -777,45 +304,33 @@
                     tabs: ['Fundamentals', 'MS Office', 'Internet', 'Programming'],
                     quizzes: {
                         'Fundamentals': [
-                            { name: 'Computer Basics',
-                                url: 'https://www.tutorialspoint.com/computer_fundamentals/computer_fundamentals_online_quiz.htm' },
+                            { name: 'Computer Basics', url: 'https://www.tutorialspoint.com/computer_fundamentals/computer_fundamentals_online_quiz.htm' },
                         ],
                         'MS Office': [
-                            { name: 'MS Word Quiz',
-                            url: 'https://www.proprofs.com/quiz-school/topic/microsoft-word' },
-                            { name: 'Excel Shortcuts',
-                                url: 'https://www.excel-easy.com/quiz/shortcuts.html' },
+                            { name: 'MS Word Quiz', url: 'https://www.proprofs.com/quiz-school/topic/microsoft-word' },
+                            { name: 'Excel Shortcuts', url: 'https://www.excel-easy.com/quiz/shortcuts.html' },
                         ],
                         'Internet': [
-                            { name: 'Internet & Networking',
-                            url: 'https://www.networkingquiz.org/' },
+                            { name: 'Internet & Networking', url: 'https://www.networkingquiz.org/' },
                         ],
                         'Programming': [
-                            { name: 'Programming Basics',
-                            url: 'https://www.w3schools.com/quiztest/' },
+                            { name: 'Programming Basics', url: 'https://www.w3schools.com/quiztest/' },
                         ],
                     }
                 }
             };
 
             const defaultTestItems = [
-                { name: "English Mock Test", desc: "Full syllabus English practice",
-                    url: "https://learnodishahelp-cmd.github.io/firebase1/" },
-                { name: "Math Aptitude", desc: "Quantitative aptitude test",
-                url: "https://www.indiabix.com/aptitude/" },
-                { name: "Reasoning Ability", desc: "Logical & analytical reasoning",
-                    url: "https://www.indiabix.com/logical-reasoning/" },
-                { name: "GK Test", desc: "General knowledge assessment",
-                url: "https://www.gktoday.in/quizbase/" },
+                { name: "English Mock Test", desc: "Full syllabus English practice", url: "https://www.examenglish.com/" },
+                { name: "Math Aptitude", desc: "Quantitative aptitude test", url: "https://www.indiabix.com/aptitude/" },
+                { name: "Reasoning Ability", desc: "Logical & analytical reasoning", url: "https://www.indiabix.com/logical-reasoning/" },
+                { name: "GK Test", desc: "General knowledge assessment", url: "https://www.gktoday.in/quizbase/" },
             ];
 
             const defaultResultItems = [
-                { name: "Score Check", desc: "View your latest scores",
-                url: "https://www.indiabix.com/online-test/aptitude-test/" },
-                { name: "Rank Predictor", desc: "Check your expected rank",
-                url: "https://www.indiabix.com/" },
-                { name: "Performance Report", desc: "Detailed subject-wise analysis",
-                    url: "https://www.indiabix.com/" },
+                { name: "Score Check", desc: "View your latest scores", url: "https://www.indiabix.com/online-test/aptitude-test/" },
+                { name: "Rank Predictor", desc: "Check your expected rank", url: "https://www.indiabix.com/" },
+                { name: "Performance Report", desc: "Detailed subject-wise analysis", url: "https://www.indiabix.com/" },
             ];
 
             let appData = {};
@@ -823,31 +338,40 @@
             let currentSubject = null;
             let currentTab = null;
 
-            // ============ DOM HELPERS ============
             const $ = (id) => document.getElementById(id);
 
-            // ============ LOAD DATA ============
+            // ============ LOAD DATA WITH VERSION CHECK ============
             function loadData() {
-                const stored = localStorage.getItem(APP_KEY);
-                if (stored) {
+                const storedVersion = localStorage.getItem(VERSION_KEY);
+                const storedData = localStorage.getItem(APP_KEY);
+
+                // If version mismatch or no data, use fresh defaults
+                if (!storedVersion || parseInt(storedVersion) !== DATA_VERSION || !storedData) {
+                    console.log('📦 Data version mismatch or missing – loading fresh defaults.');
+                    appData = JSON.parse(JSON.stringify(defaultData));
+                    // Reset test/result items to defaults as well
+                    localStorage.setItem(TEST_ITEMS_KEY, JSON.stringify(defaultTestItems));
+                    localStorage.setItem(RESULT_ITEMS_KEY, JSON.stringify(defaultResultItems));
+                } else {
                     try {
-                        appData = JSON.parse(stored);
+                        appData = JSON.parse(storedData);
+                        // Ensure all subject keys exist (in case new ones were added)
+                        for (const key of Object.keys(defaultData)) {
+                            if (!appData[key]) appData[key] = JSON.parse(JSON.stringify(defaultData[key]));
+                            if (!appData[key].tabs) appData[key].tabs = [...defaultData[key].tabs];
+                            if (!appData[key].quizzes) appData[key].quizzes = JSON.parse(JSON.stringify(defaultData[key].quizzes));
+                            for (const tab of appData[key].tabs) {
+                                if (!appData[key].quizzes[tab]) appData[key].quizzes[tab] = [];
+                            }
+                        }
                     } catch (e) {
+                        console.warn('Data parse error, resetting to defaults.');
                         appData = JSON.parse(JSON.stringify(defaultData));
                     }
-                } else {
-                    appData = JSON.parse(JSON.stringify(defaultData));
                 }
-                // Ensure all subjects exist
-                for (const key of Object.keys(defaultData)) {
-                    if (!appData[key]) appData[key] = JSON.parse(JSON.stringify(defaultData[key]));
-                    if (!appData[key].tabs) appData[key].tabs = [...defaultData[key].tabs];
-                    if (!appData[key].quizzes) appData[key].quizzes = JSON.parse(JSON.stringify(defaultData[key]
-                        .quizzes));
-                    for (const tab of appData[key].tabs) {
-                        if (!appData[key].quizzes[tab]) appData[key].quizzes[tab] = [];
-                    }
-                }
+
+                // Save current version and data
+                localStorage.setItem(VERSION_KEY, DATA_VERSION.toString());
                 saveData();
 
                 // Ticker
@@ -857,18 +381,8 @@
                 // Student session
                 const session = sessionStorage.getItem(STUDENT_KEY);
                 if (session) {
-                    try {
-                        currentStudent = JSON.parse(session);
-                    } catch (e) {
-                        currentStudent = null;
-                    }
+                    try { currentStudent = JSON.parse(session); } catch (e) { currentStudent = null; }
                 }
-
-                // Test/Result items
-                if (!localStorage.getItem(TEST_ITEMS_KEY)) localStorage.setItem(TEST_ITEMS_KEY, JSON.stringify(
-                    defaultTestItems));
-                if (!localStorage.getItem(RESULT_ITEMS_KEY)) localStorage.setItem(RESULT_ITEMS_KEY, JSON.stringify(
-                    defaultResultItems));
             }
 
             function saveData() {
@@ -908,7 +422,6 @@
 
             // ============ SPLASH ============
             let splashDone = false;
-
             function hideSplash() {
                 if (splashDone) return;
                 splashDone = true;
@@ -919,18 +432,12 @@
                 clearTimeout(splashTimer);
             }
             $('splashScreen').addEventListener('click', hideSplash);
-            $('splashScreen').addEventListener('touchend', function(e) {
-                e.preventDefault();
-                hideSplash();
-            });
-            let splashTimer = setTimeout(() => {
-                if (!splashDone) hideSplash();
-            }, 4000);
+            $('splashScreen').addEventListener('touchend', (e) => { e.preventDefault(); hideSplash(); });
+            let splashTimer = setTimeout(() => { if (!splashDone) hideSplash(); }, 4000);
 
             // ============ NAVIGATION ============
             function showPage(page) {
-                [$('dashboardPage'), $('subjectPage'), $('testPage'), $('resultPage'), $('studentLoginPage')]
-                .forEach(p => p.classList.remove('active'));
+                [$('dashboardPage'), $('subjectPage'), $('testPage'), $('resultPage'), $('studentLoginPage')].forEach(p => p.classList.remove('active'));
                 page.classList.add('active');
             }
 
@@ -950,7 +457,7 @@
                     reasoning: { name: 'Reasoning', icon: '🧩', bg: '#fef3c7' },
                     gk: { name: 'GK', icon: '🌍', bg: '#d1fae5' },
                     computer: { name: 'Computer', icon: '💻', bg: '#fee2e2' },
-                } [subj];
+                }[subj];
                 $('subjectIcon').textContent = info.icon;
                 $('subjectIcon').style.background = info.bg;
                 $('subjectTitle').textContent = info.name;
@@ -965,16 +472,9 @@
                     btn.textContent = tab;
                     btn.addEventListener('click', () => selectTab(tab, btn));
                     tabsContainer.appendChild(btn);
-                    if (idx === 0) {
-                        btn.classList.add('active');
-                        currentTab = tab;
-                        renderQuizzes(subj, tab);
-                    }
+                    if (idx === 0) { btn.classList.add('active'); currentTab = tab; renderQuizzes(subj, tab); }
                 });
-                if (data.tabs.length > 0) {
-                    currentTab = data.tabs[0];
-                    renderQuizzes(subj, data.tabs[0]);
-                }
+                if (data.tabs.length > 0) { currentTab = data.tabs[0]; renderQuizzes(subj, data.tabs[0]); }
                 showPage($('subjectPage'));
             };
 
@@ -992,19 +492,14 @@
                 quizzes.forEach((q, i) => {
                     const card = document.createElement('div');
                     card.className = 'quiz-card';
-                    card.innerHTML =
-                        `<div class="quiz-rank">${i + 1}</div><div class="quiz-info"><div class="quiz-name">${escapeHTML(q.name)}</div></div><span style="color:#cbd5e1;">→</span>`;
+                    card.innerHTML = `<div class="quiz-rank">${i + 1}</div><div class="quiz-info"><div class="quiz-name">${escapeHTML(q.name)}</div></div><span style="color:#cbd5e1;">→</span>`;
                     card.addEventListener('click', () => openInWebView(q.url));
                     list.appendChild(card);
                 });
             }
 
-            // ============ OPEN URL IN DEVICE BROWSER ============
             function openInWebView(url) {
-                if (!url.startsWith('http://') && !url.startsWith('https://')) {
-                    url = 'https://' + url;
-                }
-                // Use window.open with target=_blank to open in device's default browser
+                if (!url.startsWith('http://') && !url.startsWith('https://')) url = 'https://' + url;
                 window.open(url, '_blank', 'noopener,noreferrer');
             }
 
@@ -1016,8 +511,7 @@
                 items.forEach((item) => {
                     const card = document.createElement('div');
                     card.className = 'hscroll-card';
-                    card.innerHTML =
-                        `<div class="hcard-title">${escapeHTML(item.name)}</div><div class="hcard-desc">${escapeHTML(item.desc)}</div>`;
+                    card.innerHTML = `<div class="hcard-title">${escapeHTML(item.name)}</div><div class="hcard-desc">${escapeHTML(item.desc)}</div>`;
                     card.addEventListener('click', () => openInWebView(item.url));
                     container.appendChild(card);
                 });
@@ -1039,68 +533,31 @@
             window.handleStudentLogin = async function() {
                 const name = $('studentName').value.trim();
                 const mobile = $('studentMobile').value.trim();
+                if (!name || name.length < 2) { showToast('⚠️ Please enter a valid name'); return; }
+                if (!mobile || !/^\d{10}$/.test(mobile)) { showToast('⚠️ Please enter a valid 10-digit mobile'); return; }
 
-                if (!name || name.length < 2) {
-                    showToast('⚠️ Please enter a valid name');
-                    $('studentName').focus();
-                    return;
-                }
-                if (!mobile || !/^\d{10}$/.test(mobile)) {
-                    showToast('⚠️ Please enter a valid 10-digit mobile number');
-                    $('studentMobile').focus();
-                    return;
-                }
-
-                // Disable button and show loading
                 const btn = $('studentLoginBtn');
                 btn.disabled = true;
                 btn.textContent = '⏳ Saving...';
                 $('loginStatus').textContent = 'Connecting to cloud...';
 
-                const studentData = {
-                    name: name,
-                    mobile: mobile,
-                    timestamp: new Date().toISOString(),
-                };
-
+                const studentData = { name, mobile, timestamp: new Date().toISOString() };
                 let savedToCloud = false;
-
-                // Save to Firebase
                 if (firebaseReady && firebaseDB) {
                     try {
-                        const newRef = await firebaseDB.ref('login').push(studentData);
+                        await firebaseDB.ref('login').push(studentData);
                         savedToCloud = true;
-                        console.log('✅ Student saved to Firebase with key:', newRef.key);
-                    } catch (err) {
-                        console.error('❌ Firebase save error:', err.message);
-                        savedToCloud = false;
-                    }
-                } else {
-                    console.warn('⚠️ Firebase not available, saving locally only');
-                    savedToCloud = false;
-                }
+                    } catch (err) { console.error(err); }
+                } else { console.warn('Firebase not available'); }
 
-                // Save locally in session
                 currentStudent = { name, mobile };
                 sessionStorage.setItem(STUDENT_KEY, JSON.stringify(currentStudent));
-
-                // Update UI
                 updateStudentUI();
                 btn.disabled = false;
                 btn.textContent = '🔐 Login / Register';
-
-                if (savedToCloud) {
-                    $('loginStatus').textContent = '✅ Successfully saved to cloud!';
-                    showToast('✅ Welcome, ' + name.split(' ')[0] + '! Data saved to cloud.');
-                } else {
-                    $('loginStatus').textContent = '⚠️ Saved locally (cloud unavailable).';
-                    showToast('✅ Welcome, ' + name.split(' ')[0] + '! (Saved locally)');
-                }
-
-                // Auto-navigate to dashboard
-                setTimeout(() => {
-                    goToDashboard();
-                }, 1000);
+                $('loginStatus').textContent = savedToCloud ? '✅ Saved to cloud!' : '⚠️ Saved locally';
+                showToast('✅ Welcome, ' + name.split(' ')[0] + '!');
+                setTimeout(() => goToDashboard(), 1000);
             };
 
             window.handleStudentLogout = function() {
@@ -1110,7 +567,7 @@
                 $('loginStatus').textContent = 'Data is securely saved to cloud.';
                 $('studentLoginBtn').disabled = false;
                 $('studentLoginBtn').textContent = '🔐 Login / Register';
-                showToast('👋 Logged out successfully');
+                showToast('👋 Logged out');
                 setTimeout(() => goToDashboard(), 400);
             };
 
@@ -1120,9 +577,7 @@
                 $('headerSubtitle').textContent = 'Student Login';
             };
 
-            // ============ TOAST ============
             let toastTimer;
-
             function showToast(msg) {
                 const t = $('toast');
                 t.textContent = msg;
@@ -1131,42 +586,26 @@
                 toastTimer = setTimeout(() => t.classList.remove('show'), 2400);
             }
 
-            // ============ HELPERS ============
             function escapeHTML(str) {
                 const div = document.createElement('div');
                 div.textContent = str;
                 return div.innerHTML;
             }
 
-            // ============ KEYBOARD ESCAPE ============
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape') {
-                    const activePage = document.querySelector('.page.active');
-                    if (activePage && activePage.id !== 'dashboardPage') {
-                        goToDashboard();
-                    }
-                }
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && !$('dashboardPage').classList.contains('active')) goToDashboard();
             });
 
-            // ============ INIT ============
+            // ============ START ============
             loadData();
             updateCounts();
             updateStudentUI();
 
             const splashSeen = sessionStorage.getItem('splash_seen_v5');
-            if (splashSeen === 'true') {
-                clearTimeout(splashTimer);
-                splashTimer = setTimeout(() => {
-                    if (!splashDone) hideSplash();
-                }, 600);
-            }
+            if (splashSeen === 'true') { clearTimeout(splashTimer); splashTimer = setTimeout(() => { if (!splashDone) hideSplash(); }, 600); }
             sessionStorage.setItem('splash_seen_v5', 'true');
 
-            console.log('🧠 Quizmaster Ready!');
-            console.log('📚 Subjects: English, Math, Reasoning, GK, Computer');
-            console.log('📝 Test & Result pages with horizontal cards');
-            console.log('☁️ Firebase:', firebaseReady ? 'Connected' : 'Not connected');
-            console.log('🌐 All links open in device browser (web view)');
+            console.log('🧠 Quizmaster Ready | Data version: ' + DATA_VERSION);
         })();
     </script>
 </body>
